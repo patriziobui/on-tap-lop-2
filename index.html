@@ -964,24 +964,24 @@ const FALLBACK_DATA = {
         },
         {
           context: "Bé học bài vào buổi tối.",
-          question: "_____ bé học bài?",
-          answer: "Khi nào",
-          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
-          explain: "Câu trả lời là thời gian → dùng \"Khi nào?\""
+          question: "Bé học bài _____?",
+          answer: "khi nào",
+          choices: ["vì sao", "khi nào", "ở đâu", "để làm gì"],
+          explain: "Câu trả lời là thời gian → dùng \"khi nào?\""
         },
         {
           context: "Mẹ mua rau ở chợ.",
-          question: "_____ mẹ mua rau?",
-          answer: "Ở đâu",
-          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
-          explain: "Câu trả lời là nơi chốn → dùng \"Ở đâu?\""
+          question: "Mẹ mua rau _____?",
+          answer: "ở đâu",
+          choices: ["vì sao", "khi nào", "ở đâu", "để làm gì"],
+          explain: "Câu trả lời là nơi chốn → dùng \"ở đâu?\""
         },
         {
           context: "Em đánh răng để giữ răng sạch.",
           question: "Em đánh răng _____?",
           answer: "để làm gì",
           choices: ["vì sao", "khi nào", "ở đâu", "để làm gì"],
-          explain: "Câu trả lời là mục đích → dùng \"Để làm gì?\""
+          explain: "Câu trả lời là mục đích → dùng \"để làm gì?\""
         },
         {
           context: "Lan khóc vì bị té đau.",
@@ -992,10 +992,10 @@ const FALLBACK_DATA = {
         },
         {
           context: "Các bạn chơi đá bóng ở sân trường.",
-          question: "_____ các bạn chơi đá bóng?",
-          answer: "Ở đâu",
-          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
-          explain: "Câu trả lời là địa điểm → dùng \"Ở đâu?\""
+          question: "Các bạn chơi đá bóng _____?",
+          answer: "ở đâu",
+          choices: ["vì sao", "khi nào", "ở đâu", "để làm gì"],
+          explain: "Câu trả lời là địa điểm → dùng \"ở đâu?\""
         }
       ]
     },
@@ -1154,11 +1154,18 @@ function showScreen(id) {
   document.querySelectorAll('.screens > div').forEach(d => d.classList.remove('active'));
   const target = document.getElementById(id);
   target.classList.add('active');
-  // Scroll to just below the sticky header (56px) so content is immediately visible
   window.scrollTo({ top: 0, behavior: 'instant' });
-  // On module list screens, nudge scroll down so list items are in view
+  // List screens: scroll xuống để thấy danh sách bài
   const listScreens = ['screen-tap-doc','screen-luyen-tu','screen-dau-cau','screen-cum-tu-hoi'];
   if (listScreens.includes(id)) {
+    requestAnimationFrame(() => {
+      const inner = target.querySelector('.screen-inner');
+      if (inner) inner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+  // Play screens: scroll xuống nội dung bài tập ngay
+  const playScreens = ['screen-td-play','screen-lt-play','screen-dc-play','screen-cth-play'];
+  if (playScreens.includes(id)) {
     requestAnimationFrame(() => {
       const inner = target.querySelector('.screen-inner');
       if (inner) inner.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1196,9 +1203,14 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ══════════════════════════════════════════════
-//  TẬP ĐỌC
-// ══════════════════════════════════════════════
+// ── Auto-scroll đến nút Tiếp theo sau khi trả lời ──
+function scrollToNextBtn(btn) {
+  setTimeout(() => {
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 80);
+}
+
+
 function renderTDList() {
   const el = document.getElementById('td-list');
   el.innerHTML = DATA.tap_doc.map(ex => `
@@ -1217,20 +1229,41 @@ function playTD(id) {
   const ex = DATA.tap_doc.find(e => e.id === id);
   let timerInterval, timeLeft = 60, started = false, quizIdx = 0, score = 0;
 
-  // Stop any previously running timer
   if (window._activeTDTimer) clearInterval(window._activeTDTimer);
 
   const html = `
     <div class="section-title">${ex.icon} ${ex.title}</div>
-    <div class="reading-card">
+    <div class="reading-card" id="td-reading-card">
       <div class="reading-title">📚 Đọc bài văn</div>
       <div class="reading-text" id="td-text">${ex.text}</div>
-      <div class="timer-label" id="td-timer-label">Nhấn bắt đầu để đọc có tính giờ</div>
-      <div class="timer-bar-wrap"><div class="timer-bar" id="td-bar" style="width:100%"></div></div>
-      <button class="btn-primary btn-sky" id="td-start-btn" onclick="tdStartTimer()">▶ Bắt đầu đọc</button>
+
+      <div id="td-timer-section">
+        <div class="timer-label" id="td-timer-label">Nhấn bắt đầu để đọc có tính giờ</div>
+        <div class="timer-bar-wrap"><div class="timer-bar" id="td-bar" style="width:100%"></div></div>
+        <div style="display:flex;gap:10px;margin-top:10px" id="td-btn-row">
+          <button class="btn-primary btn-sky" id="td-start-btn" onclick="tdStartTimer()" style="flex:1">▶ Bắt đầu đọc</button>
+        </div>
+      </div>
+
+      <div id="td-done-section" style="display:none;margin-top:16px">
+        <div style="
+          background:#E8F5E9;border:2px solid #81C784;border-radius:var(--radius-sm);
+          padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:12px
+        ">
+          <span style="font-size:28px" id="td-done-icon">⏱</span>
+          <div>
+            <div style="font-weight:700;font-size:15px;color:#2E7D32" id="td-done-msg">Tốt lắm! Bé đã đọc xong.</div>
+            <div style="font-size:13px;color:#388E3C" id="td-done-time"></div>
+          </div>
+        </div>
+        <button class="btn-primary btn-grass" id="td-go-quiz-btn" onclick="tdShowQuiz()">
+          📝 Làm bài →
+        </button>
+      </div>
     </div>
+
     <div id="td-quiz" style="display:none">
-      <div class="reading-card quiz-wrap">
+      <div class="reading-card quiz-wrap" id="td-quiz-card">
         <div class="quiz-num" id="td-qnum"></div>
         <div class="quiz-question" id="td-q"></div>
         <div class="option-list" id="td-opts"></div>
@@ -1243,41 +1276,102 @@ function playTD(id) {
   document.getElementById('td-play-content').innerHTML = html;
   showScreen('screen-td-play');
 
+  // ── Bắt đầu đếm giờ ──
   function tdStartTimer() {
     if (started) return;
     started = true;
-    document.getElementById('td-start-btn').textContent = '⏱ Đang đọc...';
-    document.getElementById('td-start-btn').disabled = true;
+
+    // Đổi nút "Bắt đầu" thành "Đang đọc..." + thêm nút "Đọc xong rồi"
+    const btnRow = document.getElementById('td-btn-row');
+    btnRow.innerHTML = `
+      <button class="btn-primary btn-sky" disabled style="flex:1;opacity:0.6;cursor:default">⏱ Đang đọc...</button>
+      <button class="btn-primary" id="td-finish-btn"
+        style="flex:1;background:#FFF9C4;color:#5D4037;border:2px solid #FFD54F;box-shadow:none"
+        onclick="tdFinishEarly()">
+        ✅ Đọc xong rồi
+      </button>
+    `;
+
     timerInterval = setInterval(() => {
       timeLeft--;
       const lbl = document.getElementById('td-timer-label');
       const bar = document.getElementById('td-bar');
       if (!lbl || !bar) { clearInterval(timerInterval); return; }
+
       lbl.textContent = `Thời gian: ${timeLeft}s`;
       bar.style.width = (timeLeft / 60 * 100) + '%';
+
       if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        window._activeTDTimer = null;
-        const btn = document.getElementById('td-start-btn');
-        if (btn) {
-          btn.textContent = '✅ Hết giờ! Làm bài thôi';
-          btn.disabled = false;
-          btn.onclick = tdShowQuiz;
-        }
+        tdStopTimer('⏰', 'Hết giờ! Sẵn sàng làm bài nhé.', 'Đọc trong 60 giây');
       }
     }, 1000);
     window._activeTDTimer = timerInterval;
   }
   window.tdStartTimer = tdStartTimer;
 
-  function tdShowQuiz() {
+  // ── Bé bấm "Đọc xong rồi" trước khi hết giờ ──
+  window.tdFinishEarly = function() {
+    const elapsed = 60 - timeLeft;
+    const msg = elapsed < 30
+      ? 'Bé đọc nhanh thật! 🚀'
+      : elapsed <= 60
+        ? 'Tốt lắm! Bé đọc đúng tốc độ. 👍'
+        : 'Bé đọc rất chắc chắn! 💪';
+    const timeMsg = elapsed > 0 ? `Đọc trong ${elapsed} giây` : 'Vừa bắt đầu';
+    tdStopTimer('✅', msg, timeMsg);
+  };
+
+  // ── Dừng timer + hiện kết quả đọc + nút Làm bài ──
+  function tdStopTimer(icon, msg, timeMsg) {
     clearInterval(timerInterval);
     window._activeTDTimer = null;
-    document.querySelector('.reading-card').style.opacity = '0.5';
-    document.getElementById('td-quiz').style.display = 'block';
-    tdRenderQ();
+
+    // Ẩn section timer, hiện section done
+    const timerSection = document.getElementById('td-timer-section');
+    const doneSection  = document.getElementById('td-done-section');
+    if (!timerSection || !doneSection) return;
+
+    // Đổi thanh bar thành xanh hoàn thành
+    const bar = document.getElementById('td-bar');
+    if (bar) { bar.style.width = '100%'; bar.style.background = 'var(--grass)'; }
+    const lbl = document.getElementById('td-timer-label');
+    if (lbl) lbl.textContent = '✔ Đã đọc xong';
+
+    // Ẩn hàng nút timer
+    const btnRow = document.getElementById('td-btn-row');
+    if (btnRow) btnRow.style.display = 'none';
+
+    // Hiện section done
+    document.getElementById('td-done-icon').textContent = icon;
+    document.getElementById('td-done-msg').textContent  = msg;
+    document.getElementById('td-done-time').textContent = timeMsg;
+    doneSection.style.display = 'block';
+
+    // Scroll đến nút Làm bài
+    setTimeout(() => {
+      const goBtn = document.getElementById('td-go-quiz-btn');
+      if (goBtn) goBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
   }
 
+  // ── Chuyển sang phần câu hỏi ──
+  function tdShowQuiz() {
+    const readingCard = document.getElementById('td-reading-card');
+    if (readingCard) readingCard.style.opacity = '0.45';
+
+    const quizEl = document.getElementById('td-quiz');
+    quizEl.style.display = 'block';
+    tdRenderQ();
+
+    // Scroll xuống quiz ngay
+    setTimeout(() => {
+      const quizCard = document.getElementById('td-quiz-card');
+      if (quizCard) quizCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+  window.tdShowQuiz = tdShowQuiz;
+
+  // ── Render câu hỏi ──
   function tdRenderQ() {
     const q = ex.questions[quizIdx];
     document.getElementById('td-qnum').textContent = `Câu ${quizIdx + 1} / ${ex.questions.length}`;
@@ -1291,6 +1385,12 @@ function playTD(id) {
     document.getElementById('td-feedback').className = 'feedback-msg';
     document.getElementById('td-feedback').innerHTML = '';
     document.getElementById('td-next-btn').style.display = 'none';
+
+    // Scroll lên đầu quiz card mỗi câu mới
+    setTimeout(() => {
+      const quizCard = document.getElementById('td-quiz-card');
+      if (quizCard) quizCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 60);
   }
 
   window.tdAnswer = function(i) {
@@ -1314,6 +1414,7 @@ function playTD(id) {
     const isLast = quizIdx >= ex.questions.length - 1;
     nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
     nextBtn.className = 'btn-primary ' + (isLast ? 'btn-sun' : 'btn-grass');
+    scrollToNextBtn(nextBtn);
   };
 
   window.tdNext = function() {
@@ -1331,8 +1432,9 @@ function playTD(id) {
     addStars(stars);
     const msgs = ['Cố gắng thêm nhé! 💪', 'Khá lắm! Ôn lại nhé 👍', 'Xuất sắc! Bé học tốt lắm 🎉'];
     document.getElementById('td-quiz').style.display = 'none';
-    document.getElementById('td-result').style.display = 'block';
-    document.getElementById('td-result').innerHTML = `
+    const resultEl = document.getElementById('td-result');
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
       <div class="result-card">
         <div style="font-size:56px">🎊</div>
         <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
@@ -1343,6 +1445,7 @@ function playTD(id) {
         <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
       </div>
     `;
+    setTimeout(() => resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   }
 }
 
@@ -1419,6 +1522,7 @@ function renderLTClassify(ex) {
       nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Từ tiếp theo →';
       nextBtn.onclick = () => { wordIdx++; render(); };
       fb.after(nextBtn);
+      scrollToNextBtn(nextBtn);
     };
   }
   render();
@@ -1464,6 +1568,7 @@ function renderLTSentenceType(ex) {
       nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
       nextBtn.onclick = () => { idx++; render(); };
       fb.after(nextBtn);
+      scrollToNextBtn(nextBtn);
     };
   }
   render();
@@ -1475,9 +1580,10 @@ function showLTResult(ex, score) {
   doneMap[ex.id] = true;
   addStars(stars);
   const msgs = ['Cố gắng thêm nhé! 💪', 'Tốt lắm! 👍', 'Xuất sắc! 🌟'];
-  document.getElementById('lt-play-content').innerHTML = `
+  const el = document.getElementById('lt-play-content');
+  el.innerHTML = `
     <div class="section-title">${ex.icon} ${ex.title}</div>
-    <div class="result-card">
+    <div class="result-card" id="lt-result-card">
       <div style="font-size:56px">🎊</div>
       <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
       <div class="result-score">${score}/${total}</div>
@@ -1487,6 +1593,10 @@ function showLTResult(ex, score) {
       <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
     </div>
   `;
+  setTimeout(() => {
+    const c = document.getElementById('lt-result-card');
+    if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
 }
 
 // ══════════════════════════════════════════════
@@ -1558,6 +1668,7 @@ function playDC(id) {
       nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
       nextBtn.onclick = () => { idx++; render(); };
       fb.after(nextBtn);
+      scrollToNextBtn(nextBtn);
     };
   }
 
@@ -1568,7 +1679,7 @@ function playDC(id) {
     const msgs = ['Ôn lại quy tắc dấu câu nhé 💪', 'Khá lắm! 👍', 'Bé dùng dấu câu chuẩn lắm! 🌟'];
     el.innerHTML = `
       <div class="section-title">${ex.icon} ${ex.title}</div>
-      <div class="result-card">
+      <div class="result-card" id="dc-result-card">
         <div style="font-size:56px">🎊</div>
         <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
         <div class="result-score">${score}/${ex.items.length}</div>
@@ -1578,6 +1689,10 @@ function playDC(id) {
         <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
       </div>
     `;
+    setTimeout(() => {
+      const c = document.getElementById('dc-result-card');
+      if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
   }
 
   render();
@@ -1631,31 +1746,28 @@ function renderCTHChoose(ex) {
   let idx = 0, score = 0;
   const el = document.getElementById('cth-play-content');
 
+  // Tách câu hỏi thành phần trước và sau _____
+  function buildQuestionHTML(question, blankId) {
+    const parts = question.split('_____');
+    const before = parts[0] || '';
+    const after  = (parts[1] || '').replace(/^\s*\?/, ''); // bỏ dấu ? ngay sau blank
+    return `${before}<span class="cum-blank" id="${blankId}">___</span>${after}?`;
+  }
+
   function render() {
     if (idx >= ex.items.length) return showCTHResult(ex, score);
     const item = ex.items[idx];
-    const cc = CUM_COLORS[item.answer] || { chip: '', emoji: '❓' };
     el.innerHTML = `
       <div class="section-title">${ex.icon} ${ex.title}</div>
       <div class="cum-tu-card">
         <div style="font-size:12px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:12px">
           Câu ${idx + 1} / ${ex.items.length}
         </div>
-
-        <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase;">
-          📋 Câu gốc
-        </div>
+        <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase;">📋 Câu gốc</div>
         <div class="cum-context-box">${item.context}</div>
-
         <div class="cum-question-display">Câu hỏi cần đặt là:</div>
-        <div class="cum-blank-sentence" id="cth-q-display">
-          <span class="cum-blank" id="cth-blank">?</span>
-          ${item.question.replace('_____', '')}
-        </div>
-
-        <div style="font-size:14px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:12px">
-          Chọn cụm từ hỏi đúng:
-        </div>
+        <div class="cum-blank-sentence">${buildQuestionHTML(item.question, 'cth-blank')}</div>
+        <div style="font-size:14px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:12px">Chọn cụm từ hỏi đúng:</div>
         <div class="cum-choices" id="cth-choices">
           ${cthChoiceHTML(item.choices, item.answer)}
         </div>
@@ -1669,19 +1781,19 @@ function renderCTHChoose(ex) {
       const fb = document.getElementById('cth-fb');
       const isLast = idx >= ex.items.length - 1;
       const isOk = chosen.toLowerCase() === correct.toLowerCase();
-      blank.textContent = chosen + '?';
+      blank.textContent = chosen;
       if (isOk) {
         score++;
         blank.classList.add('filled-correct');
         document.querySelectorAll('.cum-choice-btn').forEach(b => {
-          if (b.textContent.trim().includes(chosen)) b.classList.add('correct');
+          if (b.textContent.trim().toLowerCase().includes(chosen.toLowerCase())) b.classList.add('correct');
         });
         fb.className = 'feedback-msg correct show';
         fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> ${item.explain}`;
       } else {
         blank.classList.add('filled-wrong');
         document.querySelectorAll('.cum-choice-btn').forEach(b => {
-          if (b.textContent.trim().includes(chosen)) b.classList.add('wrong');
+          if (b.textContent.trim().toLowerCase().includes(chosen.toLowerCase())) b.classList.add('wrong');
           if (b.textContent.trim().toLowerCase().includes(correct.toLowerCase())) b.classList.add('correct');
         });
         fb.className = 'feedback-msg wrong show';
@@ -1692,6 +1804,7 @@ function renderCTHChoose(ex) {
       nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
       nextBtn.onclick = () => { idx++; render(); };
       fb.after(nextBtn);
+      scrollToNextBtn(nextBtn);
     };
   }
   render();
@@ -1757,6 +1870,7 @@ function renderCTHMatchUnderline(ex) {
       nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
       nextBtn.onclick = () => { idx++; render(); };
       fb.after(nextBtn);
+      scrollToNextBtn(nextBtn);
     };
   }
   render();
@@ -1770,7 +1884,7 @@ function showCTHResult(ex, score) {
   const msgs = ['Ôn lại các cụm từ hỏi nhé 💪', 'Khá lắm, cố thêm nhé! 👍', 'Bé đặt câu hỏi giỏi lắm! 🌟'];
   document.getElementById('cth-play-content').innerHTML = `
     <div class="section-title">❓ Kết quả</div>
-    <div class="result-card">
+    <div class="result-card" id="cth-result-card">
       <div style="font-size:56px">🎉</div>
       <div style="display:flex;justify-content:center;gap:6px;margin:12px 0;flex-wrap:wrap">
         <span class="cum-tag-chip chip-vi-sao">Vì sao?</span>
@@ -1786,6 +1900,10 @@ function showCTHResult(ex, score) {
       <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
     </div>
   `;
+  setTimeout(() => {
+    const c = document.getElementById('cth-result-card');
+    if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
 }
 
 // ══════════════════════════════════════════════
