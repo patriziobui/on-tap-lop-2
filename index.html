@@ -759,12 +759,15 @@
 // ══════════════════════════════════════════════
 //  CẤU HÌNH GOOGLE SHEETS
 //  Dán URL CSV của từng tab vào đây sau khi publish
+//  Mỗi dòng = 1 tab trong Google Sheets
 // ══════════════════════════════════════════════
 const SHEETS_CONFIG = {
-  tap_doc:    '',
-  luyen_tu:   '',
-  dau_cau:    '',
-  cum_tu_hoi: '',
+  tap_doc:              '',  // tab: tap_doc
+  luyen_tu_classify:    '',  // tab: luyen_tu_classify   (phân loại từ)
+  luyen_tu_sentence:    '',  // tab: luyen_tu_sentence   (kiểu câu)
+  dau_cau:              '',  // tab: dau_cau
+  cum_tu_hoi_choose:    '',  // tab: cum_tu_hoi_choose   (chọn cụm từ hỏi)
+  cum_tu_hoi_underline: '',  // tab: cum_tu_hoi_underline (gạch chân)
 };
 
 // ══════════════════════════════════════════════
@@ -790,40 +793,97 @@ function parseCSV(text) {
 }
 
 // ── TRANSFORMERS: CSV rows → DATA format ──
+// Mỗi hàm khớp đúng cấu trúc cột của 1 tab trong Google Sheets
+
+// Tab: tap_doc — cột: id, title, icon, text, word_count, q1..q4 + q1_a..q4_ans
 function transformTapDoc(rows) {
   const byId = {};
   rows.forEach(r => {
-    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '📖', text: r.text, word_count: parseInt(r.word_count) || 60, questions: [] };
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '📖',
+      text: r.text, word_count: parseInt(r.word_count) || 60, questions: []
+    };
     [1,2,3,4].forEach(n => {
-      if (r['q'+n]) byId[r.id].questions.push({ q: r['q'+n], opts: [r['q'+n+'_a'],r['q'+n+'_b'],r['q'+n+'_c'],r['q'+n+'_d']].filter(Boolean), ans: parseInt(r['q'+n+'_ans'])||0 });
+      if (r['q'+n]) byId[r.id].questions.push({
+        q: r['q'+n],
+        opts: [r['q'+n+'_a'], r['q'+n+'_b'], r['q'+n+'_c'], r['q'+n+'_d']].filter(Boolean),
+        ans: parseInt(r['q'+n+'_ans']) || 0
+      });
     });
   });
   return Object.values(byId);
 }
-function transformLuyenTu(rows) {
+
+// Tab: luyen_tu_classify — cột: id, title, icon, desc, word, word_type
+function transformLTClassify(rows) {
   const byId = {};
   rows.forEach(r => {
-    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '🌿', type: r.type, desc: r.desc, words: [], sentences: [] };
-    if (r.type === 'classify' && r.word) byId[r.id].words.push({ word: r.word, type: r.word_type });
-    if (r.type === 'sentence_type' && r.sentence) byId[r.id].sentences.push({ s: r.sentence, type: r.sentence_type, hint: r.hint });
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '🔤',
+      type: 'classify', desc: r.desc, words: []
+    };
+    if (r.word) byId[r.id].words.push({ word: r.word, type: r.word_type });
   });
   return Object.values(byId);
 }
+
+// Tab: luyen_tu_sentence — cột: id, title, icon, desc, sentence, sentence_type, hint
+function transformLTSentence(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '💬',
+      type: 'sentence_type', desc: r.desc, sentences: []
+    };
+    if (r.sentence) byId[r.id].sentences.push({
+      s: r.sentence, type: r.sentence_type, hint: r.hint
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: dau_cau — cột: id, title, icon, desc, sentence, mark, hint
 function transformDauCau(rows) {
   const byId = {};
   rows.forEach(r => {
-    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '✏️', desc: r.desc, items: [] };
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '✏️', desc: r.desc, items: []
+    };
     if (r.sentence) byId[r.id].items.push({ before: r.sentence, mark: r.mark, hint: r.hint });
   });
   return Object.values(byId);
 }
-function transformCumTuHoi(rows) {
-  const CHOICES = ['Vì sao','Khi nào','Ở đâu','Để làm gì'];
+
+// Tab: cum_tu_hoi_choose — cột: id, title, icon, desc, context, question, answer, explain
+function transformCTHChoose(rows) {
+  const CHOICES = ['Vì sao', 'Khi nào', 'Ở đâu', 'Để làm gì'];
   const byId = {};
   rows.forEach(r => {
-    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '❓', type: r.type, desc: r.desc, items: [] };
-    if (r.type === 'choose' && r.context) byId[r.id].items.push({ context: r.context, question: r.question, answer: r.answer, choices: CHOICES, explain: r.explain });
-    if (r.type === 'match_underline' && r.sentence) byId[r.id].items.push({ sentence: r.sentence, underlined: r.underlined, answer: r.answer, choices: CHOICES, explain: r.explain });
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '🔍',
+      type: 'choose', desc: r.desc, items: []
+    };
+    if (r.context) byId[r.id].items.push({
+      context: r.context, question: r.question,
+      answer: r.answer, choices: CHOICES, explain: r.explain
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: cum_tu_hoi_underline — cột: id, title, icon, desc, sentence, underlined, answer, explain
+function transformCTHUnderline(rows) {
+  const CHOICES = ['Vì sao', 'Khi nào', 'Ở đâu', 'Để làm gì'];
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = {
+      id: r.id, title: r.title, icon: r.icon || '🖊️',
+      type: 'match_underline', desc: r.desc, items: []
+    };
+    if (r.sentence) byId[r.id].items.push({
+      sentence: r.sentence, underlined: r.underlined,
+      answer: r.answer, choices: CHOICES, explain: r.explain
+    });
   });
   return Object.values(byId);
 }
@@ -1070,20 +1130,48 @@ async function loadData() {
   }
 
   try {
-    const results = await Promise.allSettled([
-      cfg.tap_doc    ? fetchSheet(cfg.tap_doc).then(transformTapDoc)     : Promise.resolve(FALLBACK_DATA.tap_doc),
-      cfg.luyen_tu   ? fetchSheet(cfg.luyen_tu).then(transformLuyenTu)   : Promise.resolve(FALLBACK_DATA.luyen_tu),
-      cfg.dau_cau    ? fetchSheet(cfg.dau_cau).then(transformDauCau)     : Promise.resolve(FALLBACK_DATA.dau_cau),
-      cfg.cum_tu_hoi ? fetchSheet(cfg.cum_tu_hoi).then(transformCumTuHoi): Promise.resolve(FALLBACK_DATA.cum_tu_hoi),
+    // Fetch tất cả 6 tab song song
+    const [
+      tapDocRes,
+      ltClassifyRes,
+      ltSentenceRes,
+      dauCauRes,
+      cthChooseRes,
+      cthUnderlineRes,
+    ] = await Promise.allSettled([
+      cfg.tap_doc              ? fetchSheet(cfg.tap_doc).then(transformTapDoc)           : Promise.resolve(FALLBACK_DATA.tap_doc),
+      cfg.luyen_tu_classify    ? fetchSheet(cfg.luyen_tu_classify).then(transformLTClassify)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type === 'classify')),
+      cfg.luyen_tu_sentence    ? fetchSheet(cfg.luyen_tu_sentence).then(transformLTSentence)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type === 'sentence_type')),
+      cfg.dau_cau              ? fetchSheet(cfg.dau_cau).then(transformDauCau)           : Promise.resolve(FALLBACK_DATA.dau_cau),
+      cfg.cum_tu_hoi_choose    ? fetchSheet(cfg.cum_tu_hoi_choose).then(transformCTHChoose)   : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'choose')),
+      cfg.cum_tu_hoi_underline ? fetchSheet(cfg.cum_tu_hoi_underline).then(transformCTHUnderline) : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'match_underline')),
     ]);
+
+    // Lấy giá trị hoặc fallback nếu tab lỗi
+    const get = (res, fallback) => res.status === 'fulfilled' ? res.value : fallback;
+
     DATA = {
-      tap_doc:    results[0].status === 'fulfilled' ? results[0].value : FALLBACK_DATA.tap_doc,
-      luyen_tu:   results[1].status === 'fulfilled' ? results[1].value : FALLBACK_DATA.luyen_tu,
-      dau_cau:    results[2].status === 'fulfilled' ? results[2].value : FALLBACK_DATA.dau_cau,
-      cum_tu_hoi: results[3].status === 'fulfilled' ? results[3].value : FALLBACK_DATA.cum_tu_hoi,
+      tap_doc: get(tapDocRes, FALLBACK_DATA.tap_doc),
+
+      // Gộp 2 tab luyện từ thành 1 mảng
+      luyen_tu: [
+        ...get(ltClassifyRes,  FALLBACK_DATA.luyen_tu.filter(e => e.type === 'classify')),
+        ...get(ltSentenceRes,  FALLBACK_DATA.luyen_tu.filter(e => e.type === 'sentence_type')),
+      ],
+
+      dau_cau: get(dauCauRes, FALLBACK_DATA.dau_cau),
+
+      // Gộp 2 tab cụm từ hỏi thành 1 mảng
+      cum_tu_hoi: [
+        ...get(cthChooseRes,    FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'choose')),
+        ...get(cthUnderlineRes, FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'match_underline')),
+      ],
     };
-    const failed = results.filter(r => r.status === 'rejected');
-    if (failed.length) console.warn('Một số tab không fetch được, dùng data mẫu.');
+
+    const failed = [tapDocRes, ltClassifyRes, ltSentenceRes, dauCauRes, cthChooseRes, cthUnderlineRes]
+      .filter(r => r.status === 'rejected');
+    if (failed.length) console.warn(`${failed.length} tab không fetch được, dùng data mẫu thay thế.`);
+
   } catch(e) {
     console.warn('Lỗi fetch Sheet, dùng data mẫu:', e);
     DATA = FALLBACK_DATA;
