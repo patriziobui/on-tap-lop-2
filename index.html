@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiếng Việt Lớp 2 ⭐</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #4FC3F7;
+    --sun: #FFD54F;
+    --grass: #81C784;
+    --coral: #FF8A65;
+    --lavender: #CE93D8;
+    --mint: #80CBC4;
+    --bg: #FFF9F0;
+    --card: #FFFFFF;
+    --text: #2D3436;
+    --muted: #636E72;
+    --radius: 20px;
+    --radius-sm: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #4FC3F7 0%, #81C784 100%);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(79,195,247,0.3);
+  }
+  .logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo .star { font-size: 26px; animation: spin 4s linear infinite; }
+  @keyframes spin { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(15deg)} }
+
+  .stars-display {
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* ── HOME ── */
+  #screen-home { display: block; }
+  .screens > div { display: none; }
+  .screens > div.active { display: block; }
+
+  .home-hero {
+    text-align: center;
+    padding: 32px 24px 16px;
+  }
+  .home-hero h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .home-hero p {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .mascot {
+    font-size: 72px;
+    display: block;
+    margin: 8px auto;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 16px 20px 32px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  @media(max-width:400px){ .module-grid{grid-template-columns:1fr;} }
+
+  .module-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    border: 3px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .module-card:active { transform: scale(0.96); }
+  .module-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+  .module-card.tap-doc { border-color: #4FC3F7; }
+  .module-card.luyen-tu { border-color: #81C784; }
+  .module-card.dau-cau { border-color: #FFD54F; }
+
+  .module-card .icon { font-size: 48px; display: block; margin-bottom: 10px; }
+  .module-card h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .module-card p { font-size: 12px; color: var(--muted); }
+  .module-card .badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--sun);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #5D4037;
+  }
+
+  .tap-doc h2 { color: #0288D1; }
+  .luyen-tu h2 { color: #2E7D32; }
+  .dau-cau h2 { color: #E65100; }
+
+  /* ── SCREEN WRAPPERS ── */
+  .screen-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: var(--text);
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: #F5F5F5; }
+
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ── TAP DOC ── */
+  .reading-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .reading-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0288D1;
+    margin-bottom: 12px;
+  }
+  .reading-text {
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--text);
+    background: #F0F8FF;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border-left: 4px solid var(--sky);
+  }
+  .timer-bar-wrap {
+    margin: 16px 0;
+    background: #E0E0E0;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+  }
+  .timer-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4FC3F7, #81C784);
+    border-radius: 10px;
+    transition: width 1s linear;
+  }
+  .timer-label {
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-sky { background: var(--sky); color: white; box-shadow: 0 4px 12px rgba(79,195,247,0.4); }
+  .btn-grass { background: var(--grass); color: white; box-shadow: 0 4px 12px rgba(129,199,132,0.4); }
+  .btn-coral { background: var(--coral); color: white; box-shadow: 0 4px 12px rgba(255,138,101,0.4); }
+  .btn-sun { background: var(--sun); color: #5D4037; box-shadow: 0 4px 12px rgba(255,213,79,0.4); }
+
+  /* ── QUIZ ── */
+  .quiz-wrap { margin-top: 8px; }
+  .quiz-question {
+    font-family: 'Baloo 2', cursive;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .quiz-num { font-size: 12px; color: var(--muted); font-family: 'Nunito', sans-serif; font-weight: 600; margin-bottom: 8px; }
+  .option-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .option-btn {
+    background: white;
+    border: 2.5px solid #E0E0E0;
+    border-radius: var(--radius-sm);
+    padding: 13px 18px;
+    font-size: 15px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--sky); background: #F0F8FF; }
+  .option-btn.correct { border-color: #81C784; background: #E8F5E9; color: #2E7D32; }
+  .option-btn.wrong   { border-color: #EF9A9A; background: #FFEBEE; color: #C62828; }
+  .option-btn:disabled { cursor: default; }
+  .option-letter {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #F5F5F5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .feedback-msg {
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .feedback-msg.correct { background: #E8F5E9; color: #2E7D32; border: 2px solid #81C784; animation: popIn 0.25s ease; }
+  .feedback-msg.wrong   { background: #FFEBEE; color: #C62828; border: 2px solid #EF9A9A; }
+  @keyframes popIn {
+    0%   { transform: scale(0.92); opacity: 0; }
+    60%  { transform: scale(1.04); }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  .feedback-msg.show { display: block; }
+
+  /* ── LUYEN TU ── */
+  .word-type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .word-type-box {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 12px 8px;
+    text-align: center;
+    border: 2.5px solid transparent;
+    box-shadow: var(--shadow);
+    min-height: 80px;
+  }
+  .word-type-box.su-vat   { border-color: var(--sky); }
+  .word-type-box.hoat-dong{ border-color: var(--coral); }
+  .word-type-box.dac-diem { border-color: var(--lavender); }
+  .word-type-label {
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .word-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 32px; }
+  .word-tag {
+    background: #F5F5F5;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .word-tag:active { transform: scale(0.94); }
+  .word-tag.placed { opacity: 0.4; pointer-events: none; }
+
+  .word-bank {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .word-bank-label {
+    font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 10px;
+  }
+  .word-bank-items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .word-item {
+    background: #FFF9F0;
+    border: 2.5px solid var(--sun);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    color: #5D4037;
+  }
+  .word-item:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  .word-item.used { opacity: 0.35; pointer-events: none; }
+
+  .sentence-type-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+  }
+  .sentence-display {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    background: #F8F8F8;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-weight: 600;
+  }
+  .type-options { display: flex; gap: 8px; flex-wrap: wrap; }
+  .type-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 2.5px solid #E0E0E0;
+    background: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .type-btn:hover:not(:disabled) { border-color: var(--sky); background: #F0F8FF; }
+  .type-btn.correct { border-color: #81C784; background: #E8F5E9; color: #2E7D32; }
+  .type-btn.wrong   { border-color: #EF9A9A; background: #FFEBEE; color: #C62828; }
+
+  /* ── DAU CAU ── */
+  .daucau-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .sentence-with-blank {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text);
+  }
+  .blank-slot {
+    display: inline-block;
+    min-width: 44px;
+    height: 36px;
+    background: #FFF3E0;
+    border-bottom: 3px solid var(--sun);
+    border-radius: 6px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 36px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--coral);
+    margin: 0 4px;
+    transition: all 0.2s;
+  }
+  .blank-slot.filled { background: #E8F5E9; border-color: var(--grass); color: #2E7D32; }
+  .mark-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .mark-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 3px solid #E0E0E0;
+    background: white;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    box-shadow: var(--shadow);
+  }
+  .mark-btn:hover { transform: scale(1.1); box-shadow: var(--shadow-lg); border-color: var(--sky); }
+  .mark-btn:active { transform: scale(0.95); }
+
+  /* ── RESULT ── */
+  .result-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .result-stars { font-size: 40px; margin: 12px 0; letter-spacing: 4px; }
+  .result-score {
+    font-family: 'Baloo 2', cursive;
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--sky);
+    line-height: 1;
+  }
+  .result-label { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .result-msg {
+    font-family: 'Baloo 2', cursive;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .progress-label { font-size: 13px; font-weight: 600; color: var(--muted); width: 80px; }
+  .progress-track { flex: 1; background: #E0E0E0; border-radius: 10px; height: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: #2D3436;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-weight: 700;
+    font-size: 15px;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── EXERCISE LIST ── */
+  .exercise-list { display: flex; flex-direction: column; gap: 12px; }
+  .exercise-item {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    border: 2.5px solid transparent;
+    transition: all 0.2s;
+  }
+  .exercise-item:hover { transform: translateX(4px); border-color: var(--sky); }
+  .exercise-item .ex-icon { font-size: 32px; flex-shrink: 0; }
+  .exercise-item .ex-info h3 { font-family: 'Baloo 2', cursive; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .exercise-item .ex-info p { font-size: 12px; color: var(--muted); }
+  .exercise-item .ex-done { margin-left: auto; font-size: 20px; }
+
+  /* ── CỤM TỪ HỎI ── */
+  .cum-tu-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .cum-context-box {
+    background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.8;
+    color: var(--text);
+    border-left: 4px solid var(--grass);
+    margin-bottom: 20px;
+  }
+  .cum-question-display {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .cum-blank-sentence {
+    font-size: 19px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 2;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .cum-blank {
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 3px solid var(--mint);
+    background: #E0F7FA;
+    border-radius: 8px;
+    padding: 2px 10px;
+    color: #00838F;
+    font-weight: 800;
+    vertical-align: middle;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .cum-blank.filled-correct { background: #E8F5E9; border-color: var(--grass); color: #2E7D32; }
+  .cum-blank.filled-wrong   { background: #FFEBEE; border-color: #EF9A9A; color: #C62828; text-decoration: line-through; }
+  .cum-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .cum-choice-btn {
+    padding: 12px 10px;
+    border-radius: var(--radius-sm);
+    border: 2.5px solid #E0E0E0;
+    background: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+  }
+  .cum-choice-btn:hover:not(:disabled) { border-color: var(--mint); background: #E0F7FA; transform: translateY(-2px); }
+  .cum-choice-btn:active { transform: scale(0.96); }
+  .cum-choice-btn.correct { border-color: #81C784; background: #E8F5E9; color: #2E7D32; }
+  .cum-choice-btn.wrong   { border-color: #EF9A9A; background: #FFEBEE; color: #C62828; }
+
+  .cum-tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 3px;
+  }
+  .chip-vi-sao   { background: #FFF3E0; color: #E65100; border: 2px solid #FFCC80; }
+  .chip-khi-nao  { background: #E8EAF6; color: #283593; border: 2px solid #9FA8DA; }
+  .chip-o-dau    { background: #E0F7FA; color: #006064; border: 2px solid #80DEEA; }
+  .chip-de-lam-gi{ background: #F3E5F5; color: #6A1B9A; border: 2px solid #CE93D8; }
+
+  /* ── PARENT TIP ── */
+  .parent-tip {
+    background: linear-gradient(135deg, #FFF9C4, #FFF3E0);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border: 2px solid #FFD54F;
+    margin-top: 16px;
+  }
+  .parent-tip .tip-icon { font-size: 24px; flex-shrink: 0; }
+  .parent-tip p { font-size: 13px; line-height: 1.6; color: #5D4037; font-style: italic; }
+  .parent-tip strong { display: block; font-size: 13px; font-weight: 700; color: #E65100; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="star">⭐</span>
+    Tiếng Việt Lớp 2
+  </div>
+  <div class="stars-display">
+    <span>⭐</span>
+    <span id="total-stars">0</span>
+  </div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<div class="screens">
+
+  <!-- ════════════ HOME ════════════ -->
+  <div id="screen-home" class="active">
+    <div class="home-hero">
+      <span class="mascot">🦉</span>
+      <h1>Chào mừng bé<br>học Tiếng Việt!</h1>
+      <p>Chọn bài học để bắt đầu nhé 👇</p>
+    </div>
+    <div class="module-grid">
+      <div class="module-card tap-doc" onclick="showModule('tap-doc')">
+        <span class="icon">📖</span>
+        <h2>Tập đọc</h2>
+        <p>Đọc bài & trả lời câu hỏi</p>
+        <span class="badge" id="badge-td">3 bài</span>
+      </div>
+      <div class="module-card luyen-tu" onclick="showModule('luyen-tu')">
+        <span class="icon">🌿</span>
+        <h2>Luyện từ</h2>
+        <p>Phân loại từ & kiểu câu</p>
+        <span class="badge" id="badge-lt">2 bài</span>
+      </div>
+      <div class="module-card dau-cau" onclick="showModule('dau-cau')">
+        <span class="icon">✏️</span>
+        <h2>Dấu câu</h2>
+        <p>Điền . , ? ! đúng chỗ</p>
+        <span class="badge" id="badge-dc">2 bài</span>
+      </div>
+      <div class="module-card" style="border-color:#80CBC4;" onclick="showModule('cum-tu-hoi')">
+        <span class="icon">❓</span>
+        <h2 style="color:#00838F;">Cụm từ hỏi</h2>
+        <p>Vì sao? Khi nào? Ở đâu?</p>
+        <span class="badge" id="badge-cth" style="background:#E0F7FA;color:#006064;">2 bài</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ TẬP ĐỌC LIST ════════════ -->
+  <div id="screen-tap-doc">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="goHome()">← Trang chủ</button>
+      <div class="section-title">📖 Tập đọc</div>
+      <div class="exercise-list" id="td-list"></div>
+      <div class="parent-tip">
+        <span class="tip-icon">💡</span>
+        <div>
+          <strong>Gợi ý cho phụ huynh</strong>
+          Cho bé luyện đọc thêm các bài trong sách giáo khoa hoặc sách đọc ngoài giờ — tốc độ đọc lý tưởng là 60–70 tiếng/phút.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ TẬP ĐỌC PLAY ════════════ -->
+  <div id="screen-td-play">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="showModule('tap-doc')">← Danh sách bài</button>
+      <div id="td-play-content"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ LUYỆN TỪ LIST ════════════ -->
+  <div id="screen-luyen-tu">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="goHome()">← Trang chủ</button>
+      <div class="section-title">🌿 Luyện từ</div>
+      <div class="exercise-list" id="lt-list"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ LUYỆN TỪ PLAY ════════════ -->
+  <div id="screen-lt-play">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="showModule('luyen-tu')">← Danh sách bài</button>
+      <div id="lt-play-content"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ DẤU CÂU LIST ════════════ -->
+  <div id="screen-dau-cau">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="goHome()">← Trang chủ</button>
+      <div class="section-title">✏️ Dấu câu</div>
+      <div class="exercise-list" id="dc-list"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ DẤU CÂU PLAY ════════════ -->
+  <div id="screen-dc-play">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="showModule('dau-cau')">← Danh sách bài</button>
+      <div id="dc-play-content"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ CỤM TỪ HỎI LIST ════════════ -->
+  <div id="screen-cum-tu-hoi">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="goHome()">← Trang chủ</button>
+      <div class="section-title">❓ Cụm từ hỏi</div>
+      <div style="background:white;border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px">Bé sẽ luyện đặt câu hỏi với:</div>
+        <div>
+          <span class="cum-tag-chip chip-vi-sao">🔴 Vì sao?</span>
+          <span class="cum-tag-chip chip-khi-nao">🔵 Khi nào?</span>
+          <span class="cum-tag-chip chip-o-dau">🟢 Ở đâu?</span>
+          <span class="cum-tag-chip chip-de-lam-gi">🟣 Để làm gì?</span>
+        </div>
+      </div>
+      <div class="exercise-list" id="cth-list"></div>
+    </div>
+  </div>
+
+  <!-- ════════════ CỤM TỪ HỎI PLAY ════════════ -->
+  <div id="screen-cth-play">
+    <div class="screen-inner">
+      <button class="back-btn" onclick="showModule('cum-tu-hoi')">← Danh sách bài</button>
+      <div id="cth-play-content"></div>
+    </div>
+  </div>
+
+</div><!-- .screens -->
+
+<script>
+// ══════════════════════════════════════════════
+//  CẤU HÌNH GOOGLE SHEETS
+//  Dán URL CSV của từng tab vào đây sau khi publish
+// ══════════════════════════════════════════════
+const SHEETS_CONFIG = {
+  tap_doc:    '',
+  luyen_tu:   '',
+  dau_cau:    '',
+  cum_tu_hoi: '',
+};
+
+// ══════════════════════════════════════════════
+//  CSV PARSER
+// ══════════════════════════════════════════════
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+  return lines.slice(1).map(line => {
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+      else { cur += c; }
+    }
+    cols.push(cur.trim());
+    const row = {};
+    headers.forEach((h, i) => { row[h] = (cols[i] || '').replace(/^"|"$/g, '').trim(); });
+    return row;
+  }).filter(r => r[headers[0]]);
+}
+
+// ── TRANSFORMERS: CSV rows → DATA format ──
+function transformTapDoc(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '📖', text: r.text, word_count: parseInt(r.word_count) || 60, questions: [] };
+    [1,2,3,4].forEach(n => {
+      if (r['q'+n]) byId[r.id].questions.push({ q: r['q'+n], opts: [r['q'+n+'_a'],r['q'+n+'_b'],r['q'+n+'_c'],r['q'+n+'_d']].filter(Boolean), ans: parseInt(r['q'+n+'_ans'])||0 });
+    });
+  });
+  return Object.values(byId);
+}
+function transformLuyenTu(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '🌿', type: r.type, desc: r.desc, words: [], sentences: [] };
+    if (r.type === 'classify' && r.word) byId[r.id].words.push({ word: r.word, type: r.word_type });
+    if (r.type === 'sentence_type' && r.sentence) byId[r.id].sentences.push({ s: r.sentence, type: r.sentence_type, hint: r.hint });
+  });
+  return Object.values(byId);
+}
+function transformDauCau(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '✏️', desc: r.desc, items: [] };
+    if (r.sentence) byId[r.id].items.push({ before: r.sentence, mark: r.mark, hint: r.hint });
+  });
+  return Object.values(byId);
+}
+function transformCumTuHoi(rows) {
+  const CHOICES = ['Vì sao','Khi nào','Ở đâu','Để làm gì'];
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon || '❓', type: r.type, desc: r.desc, items: [] };
+    if (r.type === 'choose' && r.context) byId[r.id].items.push({ context: r.context, question: r.question, answer: r.answer, choices: CHOICES, explain: r.explain });
+    if (r.type === 'match_underline' && r.sentence) byId[r.id].items.push({ sentence: r.sentence, underlined: r.underlined, answer: r.answer, choices: CHOICES, explain: r.explain });
+  });
+  return Object.values(byId);
+}
+
+// ── FETCH helper ──
+async function fetchSheet(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return parseCSV(await res.text());
+}
+
+// ══════════════════════════════════════════════
+//  FALLBACK DATA (dùng khi chưa có URL Sheet)
+// ══════════════════════════════════════════════
+const FALLBACK_DATA = {
+  tap_doc: [
+    {
+      id: "td_01",
+      title: "Cậu bé và con chim sẻ",
+      icon: "🐦",
+      text: "Một buổi sáng đẹp trời, cậu bé Minh đi học về thì thấy một con chim sẻ nhỏ nằm trên đường. Con chim bị ngã từ tổ xuống. Minh nhẹ nhàng bế con chim lên và đặt vào hộp giấy êm ái. Cậu chăm sóc nó từng ngày. Đến khi chim khỏe, Minh thả nó về bầu trời xanh.",
+      word_count: 62,
+      questions: [
+        { q: "Minh tìm thấy con chim ở đâu?", opts: ["Trên cây", "Trên đường", "Trong vườn", "Trong nhà"], ans: 1 },
+        { q: "Chim sẻ bị làm sao?", opts: ["Bị ướt mưa", "Bị mèo cắn", "Ngã từ tổ xuống", "Bị lạc đường"], ans: 2 },
+        { q: "Minh đặt con chim vào đâu?", opts: ["Chiếc túi", "Hộp giấy", "Chiếc mũ", "Cái rổ"], ans: 1 },
+        { q: "Cuối cùng Minh làm gì với con chim?", opts: ["Bán đi", "Nuôi mãi", "Thả về bầu trời", "Cho bạn"], ans: 2 }
+      ]
+    },
+    {
+      id: "td_02",
+      title: "Khu vườn nhà bà",
+      icon: "🌻",
+      text: "Khu vườn nhà bà nội của Lan thật đẹp. Buổi sáng sớm, hoa huệ trắng toả hương thơm dịu dàng. Bướm bay rập rờn trên những bông hoa vàng. Bà trồng rau muống xanh mướt và cà chua đỏ tươi. Mỗi lần đến nhà bà, Lan đều ra vườn phụ bà tưới cây và thu hái rau quả.",
+      word_count: 58,
+      questions: [
+        { q: "Khu vườn của ai?", opts: ["Bà ngoại", "Bà nội", "Mẹ Lan", "Cô Lan"], ans: 1 },
+        { q: "Hoa nào toả hương buổi sáng?", opts: ["Hoa hồng", "Hoa cúc", "Hoa huệ trắng", "Hoa lan"], ans: 2 },
+        { q: "Bà trồng rau gì trong vườn?", opts: ["Rau cải", "Rau muống", "Rau ngót", "Rau dền"], ans: 1 },
+        { q: "Lan làm gì khi đến nhà bà?", opts: ["Chơi trò chơi", "Nấu cơm", "Phụ tưới cây", "Xem tivi"], ans: 2 }
+      ]
+    },
+    {
+      id: "td_03",
+      title: "Ngày đầu đi học",
+      icon: "🎒",
+      text: "Hôm nay là ngày đầu tiên Nam đến trường. Mẹ mặc cho Nam chiếc áo trắng tinh. Trên tay Nam có chiếc cặp sách mới màu xanh. Đến trường, Nam thấy nhiều bạn nhỏ cũng đang đứng chờ. Cô giáo hiền từ dẫn các em vào lớp. Nam ngồi cạnh một bạn tên Hà. Hai bạn cùng cười và chào nhau.",
+      word_count: 65,
+      questions: [
+        { q: "Đây là lần mấy Nam đến trường?", opts: ["Lần thứ hai", "Đã nhiều lần", "Lần đầu tiên", "Chưa rõ"], ans: 2 },
+        { q: "Chiếc cặp sách của Nam màu gì?", opts: ["Màu đỏ", "Màu vàng", "Màu xanh", "Màu trắng"], ans: 2 },
+        { q: "Ai dẫn các em vào lớp?", opts: ["Bố Nam", "Mẹ Nam", "Bác bảo vệ", "Cô giáo"], ans: 3 },
+        { q: "Nam ngồi cạnh ai?", opts: ["Bạn tên Hùng", "Bạn tên Hà", "Bạn tên Mai", "Bạn tên Lan"], ans: 1 }
+      ]
+    }
+  ],
+
+  luyen_tu: [
+    {
+      id: "lt_01",
+      title: "Phân loại từ",
+      icon: "🔤",
+      type: "classify",
+      desc: "Chọn đúng loại cho mỗi từ",
+      words: [
+        { word: "bàn", type: "su_vat" },
+        { word: "chạy", type: "hoat_dong" },
+        { word: "xanh", type: "dac_diem" },
+        { word: "mèo", type: "su_vat" },
+        { word: "nhảy", type: "hoat_dong" },
+        { word: "cao", type: "dac_diem" },
+        { word: "sách", type: "su_vat" },
+        { word: "đọc", type: "hoat_dong" },
+        { word: "đỏ", type: "dac_diem" }
+      ]
+    },
+    {
+      id: "lt_02",
+      title: "Nhận dạng kiểu câu",
+      icon: "💬",
+      type: "sentence_type",
+      desc: "Câu này là kiểu gì?",
+      sentences: [
+        { s: "Con mèo đang ngủ trên sofa.", type: "Ai làm gì?", hint: "Chủ thể + hành động" },
+        { s: "Bông hoa hồng rất đẹp.", type: "Ai thế nào?", hint: "Chủ thể + đặc điểm" },
+        { s: "Bạn Lan là học sinh giỏi.", type: "Ai là gì?", hint: "Chủ thể + định nghĩa" },
+        { s: "Bé Na đang vẽ tranh.", type: "Ai làm gì?", hint: "Chủ thể + hành động" },
+        { s: "Bầu trời hôm nay trong xanh.", type: "Ai thế nào?", hint: "Chủ thể + đặc điểm" },
+        { s: "Anh Tuấn là bác sĩ.", type: "Ai là gì?", hint: "Chủ thể + định nghĩa" }
+      ]
+    }
+  ],
+
+  dau_cau: [
+    {
+      id: "dc_01",
+      title: "Điền dấu câu — Bài 1",
+      icon: "🖊️",
+      desc: "Chọn dấu câu đúng",
+      items: [
+        { before: "Hôm nay bạn có đi học không", mark: "?", hint: "Câu hỏi dùng dấu ?" },
+        { before: "Bé ơi, chăm học lên nhé", mark: "!", hint: "Câu cảm thán dùng dấu !" },
+        { before: "Con mèo ngủ ngon lành", mark: ".", hint: "Câu kể dùng dấu chấm" },
+        { before: "Trời ơi, đẹp quá", mark: "!", hint: "Câu cảm thán dùng dấu !" },
+        { before: "Em học, em đọc, em viết mỗi ngày", mark: ".", hint: "Câu kể dùng dấu chấm" }
+      ]
+    },
+    {
+      id: "dc_02",
+      title: "Điền dấu câu — Bài 2",
+      icon: "✍️",
+      desc: "Bài luyện nâng cao",
+      items: [
+        { before: "Bạn tên là gì", mark: "?", hint: "Câu hỏi dùng dấu ?" },
+        { before: "Chúc mừng sinh nhật bạn", mark: "!", hint: "Câu cảm thán dùng dấu !" },
+        { before: "Hoa mai nở vào mùa xuân", mark: ".", hint: "Câu kể dùng dấu chấm" },
+        { before: "Cô giáo dạy chúng em rất hay", mark: ".", hint: "Câu kể dùng dấu chấm" },
+        { before: "Bạn đã ăn cơm chưa", mark: "?", hint: "Câu hỏi dùng dấu ?" },
+        { before: "Ôi, con điểm mười rồi", mark: "!", hint: "Câu cảm thán dùng dấu !" }
+      ]
+    }
+  ],
+
+  cum_tu_hoi: [
+    {
+      id: "cth_01",
+      title: "Chọn cụm từ hỏi đúng",
+      icon: "🔍",
+      type: "choose",
+      desc: "Chọn cụm từ hỏi phù hợp với câu trả lời",
+      items: [
+        {
+          context: "Nam nghỉ học vì Nam bị ốm.",
+          question: "_____ Nam nghỉ học?",
+          answer: "Vì sao",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "Câu trả lời có lý do → dùng \"Vì sao?\""
+        },
+        {
+          context: "Bé học bài vào buổi tối.",
+          question: "_____ bé học bài?",
+          answer: "Khi nào",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "Câu trả lời là thời gian → dùng \"Khi nào?\""
+        },
+        {
+          context: "Mẹ mua rau ở chợ.",
+          question: "_____ mẹ mua rau?",
+          answer: "Ở đâu",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "Câu trả lời là nơi chốn → dùng \"Ở đâu?\""
+        },
+        {
+          context: "Em đánh răng để giữ răng sạch.",
+          question: "Em đánh răng _____?",
+          answer: "để làm gì",
+          choices: ["vì sao", "khi nào", "ở đâu", "để làm gì"],
+          explain: "Câu trả lời là mục đích → dùng \"Để làm gì?\""
+        },
+        {
+          context: "Lan khóc vì bị té đau.",
+          question: "_____ Lan khóc?",
+          answer: "Vì sao",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "Câu trả lời có nguyên nhân → dùng \"Vì sao?\""
+        },
+        {
+          context: "Các bạn chơi đá bóng ở sân trường.",
+          question: "_____ các bạn chơi đá bóng?",
+          answer: "Ở đâu",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "Câu trả lời là địa điểm → dùng \"Ở đâu?\""
+        }
+      ]
+    },
+    {
+      id: "cth_02",
+      title: "Đặt câu hỏi cho phần gạch chân",
+      icon: "🖊️",
+      type: "match_underline",
+      desc: "Phần in đậm trả lời cho câu hỏi nào?",
+      items: [
+        {
+          sentence: "Hoa nở vào mùa xuân.",
+          underlined: "vào mùa xuân",
+          answer: "Khi nào",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Mùa xuân\" là thời gian → câu hỏi là \"Khi nào?\""
+        },
+        {
+          sentence: "Bố đi làm để kiếm tiền nuôi gia đình.",
+          underlined: "để kiếm tiền nuôi gia đình",
+          answer: "Để làm gì",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Kiếm tiền nuôi gia đình\" là mục đích → \"Để làm gì?\""
+        },
+        {
+          sentence: "Chó con sủa vì thấy người lạ.",
+          underlined: "vì thấy người lạ",
+          answer: "Vì sao",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Thấy người lạ\" là nguyên nhân → \"Vì sao?\""
+        },
+        {
+          sentence: "Em bé ngủ trong nôi.",
+          underlined: "trong nôi",
+          answer: "Ở đâu",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Trong nôi\" là nơi chốn → \"Ở đâu?\""
+        },
+        {
+          sentence: "Nam đọc sách vào buổi sáng.",
+          underlined: "vào buổi sáng",
+          answer: "Khi nào",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Buổi sáng\" là thời gian → \"Khi nào?\""
+        },
+        {
+          sentence: "Mẹ tập thể dục để giữ gìn sức khoẻ.",
+          underlined: "để giữ gìn sức khoẻ",
+          answer: "Để làm gì",
+          choices: ["Vì sao", "Khi nào", "Ở đâu", "Để làm gì"],
+          explain: "\"Giữ gìn sức khoẻ\" là mục đích → \"Để làm gì?\""
+        }
+      ]
+    }
+  ]
+};
+
+// ══════════════════════════════════════════════
+//  LOAD DATA — Sheet nếu có URL, fallback nếu không
+// ══════════════════════════════════════════════
+let DATA = {};
+
+async function loadData() {
+  showLoadingScreen();
+  const cfg = SHEETS_CONFIG;
+  const hasAny = Object.values(cfg).some(u => u.trim() !== '');
+
+  if (!hasAny) {
+    DATA = FALLBACK_DATA;
+    hideLoadingScreen();
+    return;
+  }
+
+  try {
+    const results = await Promise.allSettled([
+      cfg.tap_doc    ? fetchSheet(cfg.tap_doc).then(transformTapDoc)     : Promise.resolve(FALLBACK_DATA.tap_doc),
+      cfg.luyen_tu   ? fetchSheet(cfg.luyen_tu).then(transformLuyenTu)   : Promise.resolve(FALLBACK_DATA.luyen_tu),
+      cfg.dau_cau    ? fetchSheet(cfg.dau_cau).then(transformDauCau)     : Promise.resolve(FALLBACK_DATA.dau_cau),
+      cfg.cum_tu_hoi ? fetchSheet(cfg.cum_tu_hoi).then(transformCumTuHoi): Promise.resolve(FALLBACK_DATA.cum_tu_hoi),
+    ]);
+    DATA = {
+      tap_doc:    results[0].status === 'fulfilled' ? results[0].value : FALLBACK_DATA.tap_doc,
+      luyen_tu:   results[1].status === 'fulfilled' ? results[1].value : FALLBACK_DATA.luyen_tu,
+      dau_cau:    results[2].status === 'fulfilled' ? results[2].value : FALLBACK_DATA.dau_cau,
+      cum_tu_hoi: results[3].status === 'fulfilled' ? results[3].value : FALLBACK_DATA.cum_tu_hoi,
+    };
+    const failed = results.filter(r => r.status === 'rejected');
+    if (failed.length) console.warn('Một số tab không fetch được, dùng data mẫu.');
+  } catch(e) {
+    console.warn('Lỗi fetch Sheet, dùng data mẫu:', e);
+    DATA = FALLBACK_DATA;
+  }
+
+  hideLoadingScreen();
+}
+
+function showLoadingScreen() {
+  let el = document.getElementById('loading-overlay');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'loading-overlay';
+    el.style.cssText = 'position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:16px;';
+    el.innerHTML = `
+      <div style="font-size:56px;animation:bounce 1s ease-in-out infinite">🦉</div>
+      <div style="font-family:'Baloo 2',cursive;font-size:18px;font-weight:700;color:var(--text)">Đang tải bài học...</div>
+      <div style="width:160px;height:8px;background:#E0E0E0;border-radius:10px;overflow:hidden">
+        <div id="load-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#4FC3F7,#81C784);border-radius:10px;transition:width 0.4s ease"></div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => { const b = document.getElementById('load-bar'); if(b) b.style.width='70%'; }, 100);
+    setTimeout(() => { const b = document.getElementById('load-bar'); if(b) b.style.width='90%'; }, 600);
+  }
+  el.style.display = 'flex';
+}
+
+function hideLoadingScreen() {
+  const b = document.getElementById('load-bar');
+  if (b) b.style.width = '100%';
+  setTimeout(() => {
+    const el = document.getElementById('loading-overlay');
+    if (el) { el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); }
+  }, 300);
+  updateBadges();
+}
+
+function updateBadges() {
+  document.getElementById('badge-td').textContent  = (DATA.tap_doc?.length    || 0) + ' bài';
+  document.getElementById('badge-lt').textContent  = (DATA.luyen_tu?.length   || 0) + ' bài';
+  document.getElementById('badge-dc').textContent  = (DATA.dau_cau?.length    || 0) + ' bài';
+  document.getElementById('badge-cth').textContent = (DATA.cum_tu_hoi?.length || 0) + ' bài';
+}
+
+// ══════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════
+let totalStars = parseInt(localStorage.getItem('tv_stars') || '0');
+let doneMap = JSON.parse(localStorage.getItem('tv_done') || '{}');
+
+function saveState() {
+  localStorage.setItem('tv_stars', totalStars);
+  localStorage.setItem('tv_done', JSON.stringify(doneMap));
+  document.getElementById('total-stars').textContent = totalStars;
+}
+
+function addStars(n) {
+  totalStars += n;
+  saveState();
+  showToast('+ ' + n + ' ⭐ sao!');
+}
+
+// ══════════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screens > div').forEach(d => d.classList.remove('active'));
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  // Scroll to just below the sticky header (56px) so content is immediately visible
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // On module list screens, nudge scroll down so list items are in view
+  const listScreens = ['screen-tap-doc','screen-luyen-tu','screen-dau-cau','screen-cum-tu-hoi'];
+  if (listScreens.includes(id)) {
+    requestAnimationFrame(() => {
+      const inner = target.querySelector('.screen-inner');
+      if (inner) inner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
+function goHome() { showScreen('screen-home'); }
+
+function showModule(mod) {
+  if (mod === 'tap-doc') {
+    renderTDList();
+    showScreen('screen-tap-doc');
+  } else if (mod === 'luyen-tu') {
+    renderLTList();
+    showScreen('screen-luyen-tu');
+  } else if (mod === 'dau-cau') {
+    renderDCList();
+    showScreen('screen-dau-cau');
+  } else if (mod === 'cum-tu-hoi') {
+    renderCTHList();
+    showScreen('screen-cum-tu-hoi');
+  }
+}
+
+// ══════════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ══════════════════════════════════════════════
+//  TẬP ĐỌC
+// ══════════════════════════════════════════════
+function renderTDList() {
+  const el = document.getElementById('td-list');
+  el.innerHTML = DATA.tap_doc.map(ex => `
+    <div class="exercise-item" onclick="playTD('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info">
+        <h3>${ex.title}</h3>
+        <p>${ex.word_count} tiếng • ${ex.questions.length} câu hỏi</p>
+      </div>
+      <span class="ex-done">${doneMap[ex.id] ? '✅' : '▶️'}</span>
+    </div>
+  `).join('');
+}
+
+function playTD(id) {
+  const ex = DATA.tap_doc.find(e => e.id === id);
+  let timerInterval, timeLeft = 60, started = false, quizIdx = 0, score = 0;
+
+  // Stop any previously running timer
+  if (window._activeTDTimer) clearInterval(window._activeTDTimer);
+
+  const html = `
+    <div class="section-title">${ex.icon} ${ex.title}</div>
+    <div class="reading-card">
+      <div class="reading-title">📚 Đọc bài văn</div>
+      <div class="reading-text" id="td-text">${ex.text}</div>
+      <div class="timer-label" id="td-timer-label">Nhấn bắt đầu để đọc có tính giờ</div>
+      <div class="timer-bar-wrap"><div class="timer-bar" id="td-bar" style="width:100%"></div></div>
+      <button class="btn-primary btn-sky" id="td-start-btn" onclick="tdStartTimer()">▶ Bắt đầu đọc</button>
+    </div>
+    <div id="td-quiz" style="display:none">
+      <div class="reading-card quiz-wrap">
+        <div class="quiz-num" id="td-qnum"></div>
+        <div class="quiz-question" id="td-q"></div>
+        <div class="option-list" id="td-opts"></div>
+        <div class="feedback-msg" id="td-feedback"></div>
+        <button class="btn-primary btn-grass" id="td-next-btn" style="display:none" onclick="tdNext()">Câu tiếp theo →</button>
+      </div>
+    </div>
+    <div id="td-result" style="display:none"></div>
+  `;
+  document.getElementById('td-play-content').innerHTML = html;
+  showScreen('screen-td-play');
+
+  function tdStartTimer() {
+    if (started) return;
+    started = true;
+    document.getElementById('td-start-btn').textContent = '⏱ Đang đọc...';
+    document.getElementById('td-start-btn').disabled = true;
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      const lbl = document.getElementById('td-timer-label');
+      const bar = document.getElementById('td-bar');
+      if (!lbl || !bar) { clearInterval(timerInterval); return; }
+      lbl.textContent = `Thời gian: ${timeLeft}s`;
+      bar.style.width = (timeLeft / 60 * 100) + '%';
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        window._activeTDTimer = null;
+        const btn = document.getElementById('td-start-btn');
+        if (btn) {
+          btn.textContent = '✅ Hết giờ! Làm bài thôi';
+          btn.disabled = false;
+          btn.onclick = tdShowQuiz;
+        }
+      }
+    }, 1000);
+    window._activeTDTimer = timerInterval;
+  }
+  window.tdStartTimer = tdStartTimer;
+
+  function tdShowQuiz() {
+    clearInterval(timerInterval);
+    window._activeTDTimer = null;
+    document.querySelector('.reading-card').style.opacity = '0.5';
+    document.getElementById('td-quiz').style.display = 'block';
+    tdRenderQ();
+  }
+
+  function tdRenderQ() {
+    const q = ex.questions[quizIdx];
+    document.getElementById('td-qnum').textContent = `Câu ${quizIdx + 1} / ${ex.questions.length}`;
+    document.getElementById('td-q').textContent = q.q;
+    const letters = ['A', 'B', 'C', 'D'];
+    document.getElementById('td-opts').innerHTML = q.opts.map((o, i) => `
+      <button class="option-btn" onclick="tdAnswer(${i})">
+        <span class="option-letter">${letters[i]}</span> ${o}
+      </button>
+    `).join('');
+    document.getElementById('td-feedback').className = 'feedback-msg';
+    document.getElementById('td-feedback').innerHTML = '';
+    document.getElementById('td-next-btn').style.display = 'none';
+  }
+
+  window.tdAnswer = function(i) {
+    const q = ex.questions[quizIdx];
+    const btns = document.querySelectorAll('.option-btn');
+    btns.forEach(b => b.disabled = true);
+    const fb = document.getElementById('td-feedback');
+    const nextBtn = document.getElementById('td-next-btn');
+    if (i === q.ans) {
+      btns[i].classList.add('correct');
+      score++;
+      fb.className = 'feedback-msg correct show';
+      fb.innerHTML = `<span style="font-size:22px">🎉</span> <strong>Đúng rồi!</strong> Bé giỏi lắm!`;
+    } else {
+      btns[i].classList.add('wrong');
+      btns[q.ans].classList.add('correct');
+      fb.className = 'feedback-msg wrong show';
+      fb.innerHTML = `<span style="font-size:18px">❌</span> Sai rồi! Đáp án đúng là: <strong>${q.opts[q.ans]}</strong>`;
+    }
+    nextBtn.style.display = 'block';
+    const isLast = quizIdx >= ex.questions.length - 1;
+    nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+    nextBtn.className = 'btn-primary ' + (isLast ? 'btn-sun' : 'btn-grass');
+  };
+
+  window.tdNext = function() {
+    quizIdx++;
+    if (quizIdx < ex.questions.length) {
+      tdRenderQ();
+    } else {
+      tdShowResult();
+    }
+  };
+
+  function tdShowResult() {
+    const stars = score === ex.questions.length ? 3 : score >= ex.questions.length * 0.6 ? 2 : 1;
+    doneMap[ex.id] = true;
+    addStars(stars);
+    const msgs = ['Cố gắng thêm nhé! 💪', 'Khá lắm! Ôn lại nhé 👍', 'Xuất sắc! Bé học tốt lắm 🎉'];
+    document.getElementById('td-quiz').style.display = 'none';
+    document.getElementById('td-result').style.display = 'block';
+    document.getElementById('td-result').innerHTML = `
+      <div class="result-card">
+        <div style="font-size:56px">🎊</div>
+        <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+        <div class="result-score">${score}/${ex.questions.length}</div>
+        <div class="result-label">câu trả lời đúng</div>
+        <div class="result-msg">${msgs[stars - 1]}</div>
+        <button class="btn-primary btn-sky" onclick="showModule('tap-doc')" style="margin-bottom:10px">← Về danh sách</button>
+        <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
+      </div>
+    `;
+  }
+}
+
+// ══════════════════════════════════════════════
+//  LUYỆN TỪ
+// ══════════════════════════════════════════════
+function renderLTList() {
+  const el = document.getElementById('lt-list');
+  el.innerHTML = DATA.luyen_tu.map(ex => `
+    <div class="exercise-item" onclick="playLT('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info">
+        <h3>${ex.title}</h3>
+        <p>${ex.desc}</p>
+      </div>
+      <span class="ex-done">${doneMap[ex.id] ? '✅' : '▶️'}</span>
+    </div>
+  `).join('');
+}
+
+function playLT(id) {
+  const ex = DATA.luyen_tu.find(e => e.id === id);
+  showScreen('screen-lt-play');
+  if (ex.type === 'classify') renderLTClassify(ex);
+  else renderLTSentenceType(ex);
+}
+
+function renderLTClassify(ex) {
+  let wordIdx = 0, score = 0;
+  const el = document.getElementById('lt-play-content');
+
+  function render() {
+    if (wordIdx >= ex.words.length) return showLTResult(ex, score);
+    const w = ex.words[wordIdx];
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="reading-card">
+        <div style="text-align:center;margin-bottom:16px">
+          <div style="font-size:13px;color:var(--muted);font-weight:600">Từ ${wordIdx + 1} / ${ex.words.length}</div>
+          <div style="font-size:42px;font-weight:800;font-family:'Baloo 2',cursive;margin:16px 0;color:var(--text)">${w.word}</div>
+          <div style="font-size:15px;color:var(--muted)">Từ này thuộc loại nào?</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="btn-primary" style="background:#E3F2FD;color:#0277BD;box-shadow:none;border:2.5px solid #90CAF9" onclick="ltClassifyAnswer('su_vat')">
+            🔵 Chỉ sự vật
+          </button>
+          <button class="btn-primary" style="background:#FBE9E7;color:#BF360C;box-shadow:none;border:2.5px solid #FFAB91" onclick="ltClassifyAnswer('hoat_dong')">
+            🔴 Chỉ hoạt động
+          </button>
+          <button class="btn-primary" style="background:#F3E5F5;color:#6A1B9A;box-shadow:none;border:2.5px solid #CE93D8" onclick="ltClassifyAnswer('dac_diem')">
+            🟣 Chỉ đặc điểm
+          </button>
+        </div>
+        <div class="feedback-msg" id="lt-fb" style="margin-top:12px"></div>
+      </div>
+    `;
+    window.ltClassifyAnswer = function(chosen) {
+      const correct = w.type;
+      const labels = { su_vat: 'Chỉ sự vật', hoat_dong: 'Chỉ hoạt động', dac_diem: 'Chỉ đặc điểm' };
+      const fb = document.getElementById('lt-fb');
+      document.querySelectorAll('.btn-primary').forEach(b => b.disabled = true);
+      const isLast = wordIdx >= ex.words.length - 1;
+      if (chosen === correct) {
+        score++;
+        fb.className = 'feedback-msg correct show';
+        fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> "${w.word}" là ${labels[correct]}`;
+      } else {
+        fb.className = 'feedback-msg wrong show';
+        fb.innerHTML = `<span style="font-size:18px">❌</span> Sai! "${w.word}" là <strong>${labels[correct]}</strong>`;
+      }
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn-primary ' + (isLast ? 'btn-sun' : 'btn-grass');
+      nextBtn.style.marginTop = '12px';
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Từ tiếp theo →';
+      nextBtn.onclick = () => { wordIdx++; render(); };
+      fb.after(nextBtn);
+    };
+  }
+  render();
+}
+
+function renderLTSentenceType(ex) {
+  let idx = 0, score = 0;
+  const el = document.getElementById('lt-play-content');
+
+  function render() {
+    if (idx >= ex.sentences.length) return showLTResult(ex, score);
+    const s = ex.sentences[idx];
+    const types = ['Ai là gì?', 'Ai làm gì?', 'Ai thế nào?'];
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="sentence-type-card">
+        <div style="font-size:13px;color:var(--muted);font-weight:600;margin-bottom:12px">Câu ${idx + 1} / ${ex.sentences.length}</div>
+        <div class="sentence-display">${s.s}</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:var(--muted)">Câu này thuộc kiểu nào?</div>
+        <div class="type-options">${types.map(t => `<button class="type-btn" onclick="ltTypeAnswer('${t}')">${t}</button>`).join('')}</div>
+        <div class="feedback-msg" id="lt-sfb" style="margin-top:12px"></div>
+      </div>
+    `;
+    window.ltTypeAnswer = function(chosen) {
+      document.querySelectorAll('.type-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === s.type) b.classList.add('correct');
+        else if (b.textContent === chosen && chosen !== s.type) b.classList.add('wrong');
+      });
+      const fb = document.getElementById('lt-sfb');
+      const isLast = idx >= ex.sentences.length - 1;
+      if (chosen === s.type) {
+        score++;
+        fb.className = 'feedback-msg correct show';
+        fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> ${s.hint}`;
+      } else {
+        fb.className = 'feedback-msg wrong show';
+        fb.innerHTML = `<span style="font-size:18px">❌</span> Sai! Đây là câu <strong>${s.type}</strong> — ${s.hint}`;
+      }
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn-primary ' + (isLast ? 'btn-sun' : 'btn-grass');
+      nextBtn.style.marginTop = '12px';
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+      nextBtn.onclick = () => { idx++; render(); };
+      fb.after(nextBtn);
+    };
+  }
+  render();
+}
+
+function showLTResult(ex, score) {
+  const total = ex.type === 'classify' ? ex.words.length : ex.sentences.length;
+  const stars = score === total ? 3 : score >= total * 0.6 ? 2 : 1;
+  doneMap[ex.id] = true;
+  addStars(stars);
+  const msgs = ['Cố gắng thêm nhé! 💪', 'Tốt lắm! 👍', 'Xuất sắc! 🌟'];
+  document.getElementById('lt-play-content').innerHTML = `
+    <div class="section-title">${ex.icon} ${ex.title}</div>
+    <div class="result-card">
+      <div style="font-size:56px">🎊</div>
+      <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+      <div class="result-score">${score}/${total}</div>
+      <div class="result-label">câu trả lời đúng</div>
+      <div class="result-msg">${msgs[stars - 1]}</div>
+      <button class="btn-primary btn-grass" onclick="showModule('luyen-tu')" style="margin-bottom:10px">← Về danh sách</button>
+      <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+//  DẤU CÂU
+// ══════════════════════════════════════════════
+function renderDCList() {
+  const el = document.getElementById('dc-list');
+  el.innerHTML = DATA.dau_cau.map(ex => `
+    <div class="exercise-item" onclick="playDC('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info">
+        <h3>${ex.title}</h3>
+        <p>${ex.items.length} câu luyện tập</p>
+      </div>
+      <span class="ex-done">${doneMap[ex.id] ? '✅' : '▶️'}</span>
+    </div>
+  `).join('');
+}
+
+function playDC(id) {
+  const ex = DATA.dau_cau.find(e => e.id === id);
+  let idx = 0, score = 0;
+  const el = document.getElementById('dc-play-content');
+  showScreen('screen-dc-play');
+  const marks = ['.', ',', '?', '!'];
+
+  function render() {
+    if (idx >= ex.items.length) return showDCResult();
+    const item = ex.items[idx];
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="daucau-card">
+        <div style="font-size:13px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:16px">
+          Câu ${idx + 1} / ${ex.items.length}
+        </div>
+        <div class="sentence-with-blank">
+          ${item.before}<span class="blank-slot" id="dc-blank">?</span>
+        </div>
+        <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:16px;color:var(--muted)">
+          Chọn dấu câu đúng:
+        </div>
+        <div class="mark-buttons">
+          ${marks.map(m => `<button class="mark-btn" onclick="dcAnswer('${m}')">${m}</button>`).join('')}
+        </div>
+        <div class="feedback-msg" id="dc-fb" style="margin-top:16px"></div>
+      </div>
+    `;
+
+    window.dcAnswer = function(chosen) {
+      document.querySelectorAll('.mark-btn').forEach(b => b.disabled = true);
+      const fb = document.getElementById('dc-fb');
+      const blank = document.getElementById('dc-blank');
+      const isLast = idx >= ex.items.length - 1;
+      blank.textContent = chosen;
+      if (chosen === item.mark) {
+        score++;
+        blank.classList.add('filled');
+        fb.className = 'feedback-msg correct show';
+        fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> ${item.hint}`;
+      } else {
+        fb.className = 'feedback-msg wrong show';
+        fb.innerHTML = `<span style="font-size:18px">❌</span> Sai! Dấu đúng là <strong>"${item.mark}"</strong> — ${item.hint}`;
+        blank.textContent = item.mark;
+        blank.classList.add('filled');
+      }
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn-primary ' + (isLast ? 'btn-sun' : 'btn-coral');
+      nextBtn.style.marginTop = '12px';
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+      nextBtn.onclick = () => { idx++; render(); };
+      fb.after(nextBtn);
+    };
+  }
+
+  function showDCResult() {
+    const stars = score === ex.items.length ? 3 : score >= ex.items.length * 0.6 ? 2 : 1;
+    doneMap[ex.id] = true;
+    addStars(stars);
+    const msgs = ['Ôn lại quy tắc dấu câu nhé 💪', 'Khá lắm! 👍', 'Bé dùng dấu câu chuẩn lắm! 🌟'];
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="result-card">
+        <div style="font-size:56px">🎊</div>
+        <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+        <div class="result-score">${score}/${ex.items.length}</div>
+        <div class="result-label">câu điền đúng dấu</div>
+        <div class="result-msg">${msgs[stars - 1]}</div>
+        <button class="btn-primary btn-coral" onclick="showModule('dau-cau')" style="margin-bottom:10px">← Về danh sách</button>
+        <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
+      </div>
+    `;
+  }
+
+  render();
+}
+
+// ══════════════════════════════════════════════
+//  CỤM TỪ HỎI
+// ══════════════════════════════════════════════
+const CUM_COLORS = {
+  'Vì sao':     { chip: 'chip-vi-sao',    emoji: '🔴' },
+  'vì sao':     { chip: 'chip-vi-sao',    emoji: '🔴' },
+  'Khi nào':    { chip: 'chip-khi-nao',   emoji: '🔵' },
+  'khi nào':    { chip: 'chip-khi-nao',   emoji: '🔵' },
+  'Ở đâu':      { chip: 'chip-o-dau',     emoji: '🟢' },
+  'ở đâu':      { chip: 'chip-o-dau',     emoji: '🟢' },
+  'Để làm gì':  { chip: 'chip-de-lam-gi', emoji: '🟣' },
+  'để làm gì':  { chip: 'chip-de-lam-gi', emoji: '🟣' },
+};
+
+function renderCTHList() {
+  const el = document.getElementById('cth-list');
+  el.innerHTML = DATA.cum_tu_hoi.map(ex => `
+    <div class="exercise-item" onclick="playCTH('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info">
+        <h3>${ex.title}</h3>
+        <p>${ex.desc}</p>
+      </div>
+      <span class="ex-done">${doneMap[ex.id] ? '✅' : '▶️'}</span>
+    </div>
+  `).join('');
+}
+
+function playCTH(id) {
+  const ex = DATA.cum_tu_hoi.find(e => e.id === id);
+  showScreen('screen-cth-play');
+  if (ex.type === 'choose') renderCTHChoose(ex);
+  else renderCTHMatchUnderline(ex);
+}
+
+function cthChoiceHTML(choices, answerKey) {
+  return choices.map(c => {
+    const cc = CUM_COLORS[c] || { chip: '', emoji: '❓' };
+    return `<button class="cum-choice-btn" onclick="cthAnswer('${c}','${answerKey}')">
+      ${cc.emoji} ${c}?
+    </button>`;
+  }).join('');
+}
+
+function renderCTHChoose(ex) {
+  let idx = 0, score = 0;
+  const el = document.getElementById('cth-play-content');
+
+  function render() {
+    if (idx >= ex.items.length) return showCTHResult(ex, score);
+    const item = ex.items[idx];
+    const cc = CUM_COLORS[item.answer] || { chip: '', emoji: '❓' };
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="cum-tu-card">
+        <div style="font-size:12px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:12px">
+          Câu ${idx + 1} / ${ex.items.length}
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase;">
+          📋 Câu gốc
+        </div>
+        <div class="cum-context-box">${item.context}</div>
+
+        <div class="cum-question-display">Câu hỏi cần đặt là:</div>
+        <div class="cum-blank-sentence" id="cth-q-display">
+          <span class="cum-blank" id="cth-blank">?</span>
+          ${item.question.replace('_____', '')}
+        </div>
+
+        <div style="font-size:14px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:12px">
+          Chọn cụm từ hỏi đúng:
+        </div>
+        <div class="cum-choices" id="cth-choices">
+          ${cthChoiceHTML(item.choices, item.answer)}
+        </div>
+        <div class="feedback-msg" id="cth-fb" style="margin-top:14px"></div>
+      </div>
+    `;
+
+    window.cthAnswer = function(chosen, correct) {
+      document.querySelectorAll('.cum-choice-btn').forEach(b => b.disabled = true);
+      const blank = document.getElementById('cth-blank');
+      const fb = document.getElementById('cth-fb');
+      const isLast = idx >= ex.items.length - 1;
+      const isOk = chosen.toLowerCase() === correct.toLowerCase();
+      blank.textContent = chosen + '?';
+      if (isOk) {
+        score++;
+        blank.classList.add('filled-correct');
+        document.querySelectorAll('.cum-choice-btn').forEach(b => {
+          if (b.textContent.trim().includes(chosen)) b.classList.add('correct');
+        });
+        fb.className = 'feedback-msg correct show';
+        fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> ${item.explain}`;
+      } else {
+        blank.classList.add('filled-wrong');
+        document.querySelectorAll('.cum-choice-btn').forEach(b => {
+          if (b.textContent.trim().includes(chosen)) b.classList.add('wrong');
+          if (b.textContent.trim().toLowerCase().includes(correct.toLowerCase())) b.classList.add('correct');
+        });
+        fb.className = 'feedback-msg wrong show';
+        fb.innerHTML = `<span style="font-size:18px">❌</span> Chưa đúng! ${item.explain}`;
+      }
+      const nextBtn = document.createElement('button');
+      nextBtn.style.cssText = 'display:block;width:100%;padding:14px;border-radius:12px;border:none;font-family:Baloo 2,cursive;font-size:18px;font-weight:700;cursor:pointer;margin-top:12px;' + (isLast ? 'background:#FFD54F;color:#5D4037;' : 'background:#80CBC4;color:white;');
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+      nextBtn.onclick = () => { idx++; render(); };
+      fb.after(nextBtn);
+    };
+  }
+  render();
+}
+
+function renderCTHMatchUnderline(ex) {
+  let idx = 0, score = 0;
+  const el = document.getElementById('cth-play-content');
+
+  function render() {
+    if (idx >= ex.items.length) return showCTHResult(ex, score);
+    const item = ex.items[idx];
+    // Highlight the underlined part in the sentence
+    const highlighted = item.sentence.replace(
+      item.underlined,
+      `<span style="background:#FFF9C4;border-bottom:2.5px solid #FFD54F;border-radius:4px;padding:0 4px;font-weight:800;color:#E65100;">${item.underlined}</span>`
+    );
+    el.innerHTML = `
+      <div class="section-title">${ex.icon} ${ex.title}</div>
+      <div class="cum-tu-card">
+        <div style="font-size:12px;color:var(--muted);font-weight:600;text-align:center;margin-bottom:12px">
+          Câu ${idx + 1} / ${ex.items.length}
+        </div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase;">
+          📋 Đọc câu sau
+        </div>
+        <div class="cum-context-box" style="font-size:18px;line-height:2">${highlighted}</div>
+
+        <div style="background:#FFF8E1;border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;font-size:13px;font-weight:600;color:#7B6000;">
+          💡 Phần <span style="color:#E65100;font-weight:800">màu vàng</span> trả lời cho câu hỏi nào?
+        </div>
+
+        <div class="cum-choices" id="cth-choices">
+          ${cthChoiceHTML(item.choices, item.answer)}
+        </div>
+        <div class="feedback-msg" id="cth-fb" style="margin-top:14px"></div>
+      </div>
+    `;
+
+    window.cthAnswer = function(chosen, correct) {
+      document.querySelectorAll('.cum-choice-btn').forEach(b => b.disabled = true);
+      const fb = document.getElementById('cth-fb');
+      const isLast = idx >= ex.items.length - 1;
+      const isOk = chosen.toLowerCase() === correct.toLowerCase();
+      if (isOk) {
+        score++;
+        document.querySelectorAll('.cum-choice-btn').forEach(b => {
+          if (b.textContent.trim().includes(chosen)) b.classList.add('correct');
+        });
+        fb.className = 'feedback-msg correct show';
+        fb.innerHTML = `<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> ${item.explain}`;
+      } else {
+        document.querySelectorAll('.cum-choice-btn').forEach(b => {
+          if (b.textContent.trim().includes(chosen)) b.classList.add('wrong');
+          if (b.textContent.trim().toLowerCase().includes(correct.toLowerCase())) b.classList.add('correct');
+        });
+        fb.className = 'feedback-msg wrong show';
+        fb.innerHTML = `<span style="font-size:18px">❌</span> Chưa đúng! ${item.explain}`;
+      }
+      const nextBtn = document.createElement('button');
+      nextBtn.style.cssText = 'display:block;width:100%;padding:14px;border-radius:12px;border:none;font-family:Baloo 2,cursive;font-size:18px;font-weight:700;cursor:pointer;margin-top:12px;' + (isLast ? 'background:#FFD54F;color:#5D4037;' : 'background:#80CBC4;color:white;');
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+      nextBtn.onclick = () => { idx++; render(); };
+      fb.after(nextBtn);
+    };
+  }
+  render();
+}
+
+function showCTHResult(ex, score) {
+  const total = ex.items.length;
+  const stars = score === total ? 3 : score >= total * 0.6 ? 2 : 1;
+  doneMap[ex.id] = true;
+  addStars(stars);
+  const msgs = ['Ôn lại các cụm từ hỏi nhé 💪', 'Khá lắm, cố thêm nhé! 👍', 'Bé đặt câu hỏi giỏi lắm! 🌟'];
+  document.getElementById('cth-play-content').innerHTML = `
+    <div class="section-title">❓ Kết quả</div>
+    <div class="result-card">
+      <div style="font-size:56px">🎉</div>
+      <div style="display:flex;justify-content:center;gap:6px;margin:12px 0;flex-wrap:wrap">
+        <span class="cum-tag-chip chip-vi-sao">Vì sao?</span>
+        <span class="cum-tag-chip chip-khi-nao">Khi nào?</span>
+        <span class="cum-tag-chip chip-o-dau">Ở đâu?</span>
+        <span class="cum-tag-chip chip-de-lam-gi">Để làm gì?</span>
+      </div>
+      <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+      <div class="result-score">${score}/${total}</div>
+      <div class="result-label">câu trả lời đúng</div>
+      <div class="result-msg">${msgs[stars - 1]}</div>
+      <button class="btn-primary" style="background:var(--mint);color:white;box-shadow:0 4px 12px rgba(128,203,196,0.4);margin-bottom:10px" onclick="showModule('cum-tu-hoi')">← Về danh sách</button>
+      <button class="btn-primary btn-sun" onclick="goHome()">🏠 Trang chủ</button>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+document.getElementById('total-stars').textContent = totalStars;
+loadData(); // fetch Sheet hoặc dùng fallback data
+</script>
+</body>
+</html>
