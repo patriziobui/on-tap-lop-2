@@ -71,7 +71,6 @@
   }
 
   /* ── HOME ── */
-  #screen-home { display: block; }
   .screens > div { display: none; }
   .screens > div.active { display: block; }
 
@@ -601,6 +600,159 @@
   .chip-o-dau    { background: #E0F7FA; color: #006064; border: 2px solid #80DEEA; }
   .chip-de-lam-gi{ background: #F3E5F5; color: #6A1B9A; border: 2px solid #CE93D8; }
 
+  /* ── SUBJECT TABS ── */
+  .subject-tabs-bar {
+    display: flex;
+    background: white;
+    border-bottom: 2px solid #F0F0F0;
+    position: sticky;
+    top: 58px;
+    z-index: 99;
+  }
+  .subject-tab {
+    flex: 1;
+    padding: 11px 0;
+    font-family: 'Baloo 2', cursive;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .subject-tab.active.viet-tab {
+    color: #0288D1;
+    border-bottom-color: #4FC3F7;
+    background: #F0F8FF;
+  }
+  .subject-tab.active.toan-tab {
+    color: #E65100;
+    border-bottom-color: #FF8A65;
+    background: #FFF3E0;
+  }
+  .subject-tab.active { color: #0288D1; border-bottom-color: #4FC3F7; background: #F0F8FF; }
+
+  /* ── TOAN HOME ── */
+  .toan-hero { text-align: center; padding: 28px 24px 12px; }
+  .toan-hero h1 { font-family: 'Baloo 2', cursive; font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+  .toan-hero p  { color: var(--muted); font-size: 14px; }
+
+  .module-card.cong-tru   { border-color: #81C784; }
+  .module-card.cong-tru h2 { color: #2E7D32; }
+  .module-card.nhan-chia  { border-color: #FFB74D; }
+  .module-card.nhan-chia h2 { color: #E65100; }
+  .module-card.so-sanh    { border-color: #64B5F6; }
+  .module-card.so-sanh h2  { color: #1565C0; }
+  .module-card.loi-van    { border-color: #F06292; }
+  .module-card.loi-van h2  { color: #AD1457; }
+  .module-card.dong-ho    { border-color: #80CBC4; }
+  .module-card.dong-ho h2  { color: #00695C; }
+  .module-card.do-luong   { border-color: #CE93D8; }
+  .module-card.do-luong h2 { color: #6A1B9A; }
+
+  /* ── TOAN EXERCISE ── */
+  .toan-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .toan-q-num { font-size: 12px; color: var(--muted); font-weight: 600; text-align: center; margin-bottom: 10px; }
+  .toan-equation {
+    font-family: 'Baloo 2', cursive;
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    color: var(--text);
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .toan-blank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    height: 52px;
+    border-bottom: 3px solid var(--sky);
+    background: #E3F2FD;
+    border-radius: 10px;
+    color: #1565C0;
+    font-size: 32px;
+    font-weight: 800;
+    transition: all 0.2s;
+    padding: 0 8px;
+  }
+  .toan-blank.filled-correct { background: #E8F5E9; border-color: var(--grass); color: #2E7D32; }
+  .toan-blank.filled-wrong   { background: #FFEBEE; border-color: #EF9A9A; color: #C62828; }
+
+  .numpad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .numpad-btn {
+    background: #F5F5F5;
+    border: 1.5px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 13px 0;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Baloo 2', cursive;
+    color: var(--text);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.12s;
+  }
+  .numpad-btn:active { transform: scale(0.94); background: #E3F2FD; }
+  .numpad-btn.confirm { background: #FFF3E0; border-color: #FFB74D; color: #E65100; }
+  .numpad-btn.del     { color: #C62828; }
+
+  .sign-choices { display: flex; gap: 14px; justify-content: center; margin-top: 14px; }
+  .sign-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 2.5px solid #F48FB1;
+    background: #FCE4EC;
+    font-size: 26px;
+    font-weight: 800;
+    color: #AD1457;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    font-family: 'Baloo 2', cursive;
+  }
+  .sign-btn:hover { transform: scale(1.08); box-shadow: var(--shadow); }
+  .sign-btn.correct { background: #E8F5E9; border-color: #81C784; color: #2E7D32; }
+  .sign-btn.wrong   { background: #FFEBEE; border-color: #EF9A9A; color: #C62828; }
+
+  /* ── CLOCK ── */
+  .clock-container { display: flex; justify-content: center; margin: 16px 0; }
+  .clock-svg { cursor: pointer; user-select: none; touch-action: none; }
+  .clock-hint { background: #E8EAF6; border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; font-weight: 600; color: #3949AB; text-align: center; margin-bottom: 12px; }
+  .clock-target { background: #F3F4FE; border-radius: var(--radius-sm); padding: 10px; text-align: center; margin-bottom: 14px; }
+  .clock-target .ct-label { font-size: 13px; color: #5C6BC0; font-weight: 600; }
+  .clock-target .ct-time  { font-family: 'Baloo 2', cursive; font-size: 30px; font-weight: 800; color: #283593; }
+
+  /* ── STORY (lời văn) ── */
+  .story-box {
+    background: #FFF8E1;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    border-left: 4px solid #FFD54F;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
   /* ── PARENT TIP ── */
   .parent-tip {
     background: linear-gradient(135deg, #FFF9C4, #FFF3E0);
@@ -619,22 +771,26 @@
 </head>
 <body>
 
-<header>
+<header id="main-header">
   <div class="logo">
     <span class="star">⭐</span>
-    Tiếng Việt Lớp 2
+    <span id="header-title">Học cùng bé</span>
   </div>
   <div class="stars-display">
     <span>⭐</span>
     <span id="total-stars">0</span>
   </div>
 </header>
+<div class="subject-tabs-bar" id="subject-tabs-bar">
+  <button class="subject-tab active" id="tab-viet" onclick="switchSubject('viet')">📚 Tiếng Việt</button>
+  <button class="subject-tab" id="tab-toan" onclick="switchSubject('toan')">🔢 Toán</button>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <div class="screens">
 
-  <!-- ════════════ HOME ════════════ -->
+  <!-- ════════════ HOME TIẾNG VIỆT ════════════ -->
   <div id="screen-home" class="active">
     <div class="home-hero">
       <span class="mascot">🦉</span>
@@ -668,6 +824,120 @@
       </div>
     </div>
   </div>
+
+  <!-- ════════════ HOME TOÁN ════════════ -->
+  <div id="screen-home-toan" style="display:none">
+    <div class="toan-hero">
+      <span class="mascot">🧮</span>
+      <h1>Toán lớp 2</h1>
+      <p>Chọn chủ đề để luyện tập nhé 👇</p>
+    </div>
+    <div class="module-grid">
+      <div class="module-card cong-tru" onclick="showToanModule('cong-tru')">
+        <span class="icon">➕</span>
+        <h2>Cộng / Trừ</h2>
+        <p>Điền số vào chỗ trống</p>
+        <span class="badge" style="background:#E8F5E9;color:#2E7D32;" id="badge-ct">0 bài</span>
+      </div>
+      <div class="module-card nhan-chia" onclick="showToanModule('nhan-chia')">
+        <span class="icon">✖️</span>
+        <h2>Nhân / Chia</h2>
+        <p>Trắc nghiệm 4 đáp án</p>
+        <span class="badge" style="background:#FFF3E0;color:#E65100;" id="badge-nc">0 bài</span>
+      </div>
+      <div class="module-card so-sanh" onclick="showToanModule('so-sanh')">
+        <span class="icon">🔢</span>
+        <h2>So sánh số</h2>
+        <p>Điền dấu &gt; &lt; =</p>
+        <span class="badge" style="background:#E3F2FD;color:#1565C0;" id="badge-ss">0 bài</span>
+      </div>
+      <div class="module-card loi-van" onclick="showToanModule('loi-van')">
+        <span class="icon">📖</span>
+        <h2>Toán lời văn</h2>
+        <p>Đọc đề, chọn đáp án</p>
+        <span class="badge" style="background:#FCE4EC;color:#AD1457;" id="badge-lv">0 bài</span>
+      </div>
+      <div class="module-card dong-ho" onclick="showToanModule('dong-ho')">
+        <span class="icon">🕐</span>
+        <h2>Đồng hồ</h2>
+        <p>Xem giờ & kéo kim</p>
+        <span class="badge" style="background:#E0F7FA;color:#00695C;" id="badge-dh">0 bài</span>
+      </div>
+      <div class="module-card do-luong" onclick="showToanModule('do-luong')">
+        <span class="icon">📏</span>
+        <h2>Đo lường</h2>
+        <p>Đơn vị cm, kg, lít...</p>
+        <span class="badge" style="background:#F3E5F5;color:#6A1B9A;" id="badge-dl">0 bài</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ TOAN MODULE SCREENS ════════════ -->
+  <div id="screen-cong-tru"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">➕ Cộng / Trừ</div>
+    <div class="exercise-list" id="ct-list"></div>
+  </div></div>
+
+  <div id="screen-ct-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('cong-tru')">← Danh sách bài</button>
+    <div id="ct-play-content"></div>
+  </div></div>
+
+  <div id="screen-nhan-chia"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">✖️ Nhân / Chia</div>
+    <div class="exercise-list" id="nc-list"></div>
+  </div></div>
+
+  <div id="screen-nc-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('nhan-chia')">← Danh sách bài</button>
+    <div id="nc-play-content"></div>
+  </div></div>
+
+  <div id="screen-so-sanh"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">🔢 So sánh số</div>
+    <div class="exercise-list" id="ss-list"></div>
+  </div></div>
+
+  <div id="screen-ss-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('so-sanh')">← Danh sách bài</button>
+    <div id="ss-play-content"></div>
+  </div></div>
+
+  <div id="screen-loi-van"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">📖 Toán lời văn</div>
+    <div class="exercise-list" id="lv-list"></div>
+  </div></div>
+
+  <div id="screen-lv-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('loi-van')">← Danh sách bài</button>
+    <div id="lv-play-content"></div>
+  </div></div>
+
+  <div id="screen-dong-ho"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">🕐 Đồng hồ</div>
+    <div class="exercise-list" id="dh-list"></div>
+  </div></div>
+
+  <div id="screen-dh-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('dong-ho')">← Danh sách bài</button>
+    <div id="dh-play-content"></div>
+  </div></div>
+
+  <div id="screen-do-luong"><div class="screen-inner">
+    <button class="back-btn" onclick="goHomeToan()">← Trang chủ Toán</button>
+    <div class="section-title">📏 Đo lường</div>
+    <div class="exercise-list" id="dl-list"></div>
+  </div></div>
+
+  <div id="screen-dl-play"><div class="screen-inner">
+    <button class="back-btn" onclick="showToanModule('do-luong')">← Danh sách bài</button>
+    <div id="dl-play-content"></div>
+  </div></div>
 
   <!-- ════════════ TẬP ĐỌC LIST ════════════ -->
   <div id="screen-tap-doc">
@@ -768,6 +1038,12 @@ const SHEETS_CONFIG = {
   dau_cau:              'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVy5NIeeHkZj6TNq1nVTwcoh6LCBRAofmYZBwL8T6lTjOZfuxHacAhNoRR4WkzSG8ttGL4kY4-ff99/pub?gid=602765872&single=true&output=csv',  // tab: dau_cau
   cum_tu_hoi_choose:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVy5NIeeHkZj6TNq1nVTwcoh6LCBRAofmYZBwL8T6lTjOZfuxHacAhNoRR4WkzSG8ttGL4kY4-ff99/pub?gid=520333030&single=true&output=csv',  // tab: cum_tu_hoi_choose   (chọn cụm từ hỏi)
   cum_tu_hoi_underline: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVy5NIeeHkZj6TNq1nVTwcoh6LCBRAofmYZBwL8T6lTjOZfuxHacAhNoRR4WkzSG8ttGL4kY4-ff99/pub?gid=455367678&single=true&output=csv',  // tab: cum_tu_hoi_underline (gạch chân)
+  toan_cong_tru:        '',  // tab: toan_cong_tru
+  toan_nhan_chia:       '',  // tab: toan_nhan_chia
+  toan_so_sanh:         '',  // tab: toan_so_sanh
+  toan_loi_van:         '',  // tab: toan_loi_van
+  toan_dong_ho:         '',  // tab: toan_dong_ho
+  toan_do_luong:        '',  // tab: toan_do_luong
 };
 
 // ══════════════════════════════════════════════
@@ -893,6 +1169,88 @@ async function fetchSheet(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error('HTTP ' + res.status);
   return parseCSV(await res.text());
+}
+
+// Tab: toan_cong_tru — id,title,icon,desc,num1,operator,num2,blank_pos,answer (mỗi câu 1 hàng)
+function transformCongTru(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'➕', desc: r.desc, items: [] };
+    if (r.num1 !== undefined) byId[r.id].items.push({
+      num1: parseInt(r.num1), op: r.operator||'+',
+      num2: parseInt(r.num2), blank: r.blank_pos||'right',
+      ans: parseInt(r.answer)
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: toan_nhan_chia — id,title,icon,desc,num1,operator,num2,opt_a,opt_b,opt_c,opt_d,answer
+function transformNhanChia(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'✖️', desc: r.desc, items: [] };
+    if (r.num1) byId[r.id].items.push({
+      num1: parseInt(r.num1), op: r.operator||'×',
+      num2: parseInt(r.num2),
+      opts: [r.opt_a, r.opt_b, r.opt_c, r.opt_d].map(Number),
+      ans: parseInt(r.answer)
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: toan_so_sanh — id,title,icon,desc,num_left,num_right,correct_sign
+function transformSoSanh(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'🔢', desc: r.desc, items: [] };
+    if (r.num_left) byId[r.id].items.push({
+      left: parseInt(r.num_left), right: parseInt(r.num_right), sign: r.correct_sign
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: toan_loi_van — id,title,icon,story,question,opt_a,opt_b,opt_c,opt_d,answer,hint
+function transformLoiVan(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'📖', items: [] };
+    if (r.story) byId[r.id].items.push({
+      story: r.story, q: r.question,
+      opts: [r.opt_a, r.opt_b, r.opt_c, r.opt_d],
+      ans: parseInt(r.answer), hint: r.hint||''
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: toan_dong_ho — id,title,icon,desc,type,hour,minute,opt_a,opt_b,opt_c,opt_d
+function transformDongHo(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'🕐', desc: r.desc, items: [] };
+    if (r.hour !== undefined) byId[r.id].items.push({
+      type: r.type||'read',
+      hour: parseInt(r.hour), minute: parseInt(r.minute)||0,
+      opts: r.opt_a ? [r.opt_a, r.opt_b, r.opt_c, r.opt_d] : null
+    });
+  });
+  return Object.values(byId);
+}
+
+// Tab: toan_do_luong — id,title,icon,desc,question,opt_a,opt_b,opt_c,opt_d,answer,hint
+function transformDoLuong(rows) {
+  const byId = {};
+  rows.forEach(r => {
+    if (!byId[r.id]) byId[r.id] = { id: r.id, title: r.title, icon: r.icon||'📏', desc: r.desc, items: [] };
+    if (r.question) byId[r.id].items.push({
+      q: r.question, opts: [r.opt_a, r.opt_b, r.opt_c, r.opt_d],
+      ans: parseInt(r.answer), hint: r.hint||''
+    });
+  });
+  return Object.values(byId);
 }
 
 // ══════════════════════════════════════════════
@@ -1110,7 +1468,86 @@ const FALLBACK_DATA = {
         }
       ]
     }
-  ]
+  ],
+
+  toan_cong_tru: [
+    { id:'tc_01', title:'Cộng không nhớ', icon:'➕', desc:'Điền số còn thiếu', items:[
+      {num1:12,op:'+',num2:5,blank:'right',ans:17},{num1:24,op:'+',num2:13,blank:'right',ans:37},
+      {num1:30,op:'+',num2:9,blank:'mid',ans:9},{num1:45,op:'-',num2:3,blank:'right',ans:42},
+      {num1:60,op:'-',num2:20,blank:'right',ans:40},{num1:35,op:'+',num2:14,blank:'left',ans:49},
+    ]},
+    { id:'tc_02', title:'Cộng có nhớ', icon:'➕', desc:'Điền số còn thiếu', items:[
+      {num1:47,op:'+',num2:28,blank:'right',ans:75},{num1:56,op:'+',num2:37,blank:'right',ans:93},
+      {num1:84,op:'-',num2:36,blank:'right',ans:48},{num1:73,op:'-',num2:45,blank:'right',ans:28},
+      {num1:38,op:'+',num2:27,blank:'mid',ans:27},{num1:92,op:'-',num2:55,blank:'left',ans:37},
+    ]},
+  ],
+  toan_nhan_chia: [
+    { id:'tn_01', title:'Bảng nhân 2, 3', icon:'✖️', desc:'Chọn đáp án đúng', items:[
+      {num1:2,op:'×',num2:4,opts:[6,8,10,12],ans:1},{num1:3,op:'×',num2:5,opts:[12,14,15,18],ans:2},
+      {num1:2,op:'×',num2:7,opts:[12,13,14,16],ans:2},{num1:3,op:'×',num2:8,opts:[21,24,27,30],ans:1},
+      {num1:2,op:'×',num2:9,opts:[16,17,18,20],ans:2},{num1:3,op:'×',num2:6,opts:[15,16,17,18],ans:3},
+    ]},
+    { id:'tn_02', title:'Bảng nhân 4, 5', icon:'✖️', desc:'Chọn đáp án đúng', items:[
+      {num1:4,op:'×',num2:3,opts:[10,11,12,14],ans:2},{num1:5,op:'×',num2:6,opts:[25,28,30,35],ans:2},
+      {num1:4,op:'×',num2:7,opts:[24,26,28,30],ans:2},{num1:5,op:'×',num2:8,opts:[35,38,40,45],ans:2},
+      {num1:4,op:'×',num2:9,opts:[32,34,36,38],ans:2},{num1:5,op:'×',num2:9,opts:[40,43,45,48],ans:2},
+    ]},
+  ],
+  toan_so_sanh: [
+    { id:'tss_01', title:'So sánh số đến 100', icon:'🔢', desc:'Điền dấu > < =', items:[
+      {left:45,right:54,sign:'<'},{left:72,right:72,sign:'='},{left:88,right:79,sign:'>'},
+      {left:31,right:41,sign:'<'},{left:96,right:69,sign:'>'},{left:50,right:50,sign:'='},
+      {left:63,right:36,sign:'>'},{left:17,right:71,sign:'<'},
+    ]},
+    { id:'tss_02', title:'So sánh số đến 1000', icon:'🔢', desc:'Điền dấu > < =', items:[
+      {left:345,right:354,sign:'<'},{left:720,right:702,sign:'>'},{left:500,right:500,sign:'='},
+      {left:189,right:198,sign:'<'},{left:637,right:367,sign:'>'},{left:412,right:421,sign:'<'},
+    ]},
+  ],
+  toan_loi_van: [
+    { id:'tlv_01', title:'Bài toán thêm bớt', icon:'📖', items:[
+      { story:'Hoa có 24 cái kẹo. Mẹ cho thêm 15 cái nữa. Hỏi Hoa có tất cả mấy cái kẹo?',
+        q:'Hoa có tất cả mấy cái kẹo?', opts:['34','37','39','42'], ans:2, hint:'24 + 15 = ?' },
+      { story:'Trong rổ có 36 quả táo. Bé ăn mất 12 quả. Hỏi còn lại mấy quả táo?',
+        q:'Còn lại mấy quả táo?', opts:['22','24','26','28'], ans:1, hint:'36 - 12 = ?' },
+      { story:'Lớp 2A có 28 học sinh, lớp 2B có 32 học sinh. Hỏi hai lớp có tất cả bao nhiêu học sinh?',
+        q:'Hai lớp có tất cả bao nhiêu học sinh?', opts:['55','58','60','62'], ans:2, hint:'28 + 32 = ?' },
+    ]},
+    { id:'tlv_02', title:'Bài toán hơn kém', icon:'📖', items:[
+      { story:'Nam nặng 28 kg, Hùng nặng 35 kg. Hỏi Hùng nặng hơn Nam bao nhiêu kg?',
+        q:'Hùng nặng hơn Nam bao nhiêu kg?', opts:['5','6','7','8'], ans:2, hint:'35 - 28 = ?' },
+      { story:'Cây bưởi cao 4 m, cây xoài cao hơn cây bưởi 2 m. Hỏi cây xoài cao bao nhiêu mét?',
+        q:'Cây xoài cao bao nhiêu mét?', opts:['4','5','6','7'], ans:2, hint:'4 + 2 = ?' },
+    ]},
+  ],
+  toan_dong_ho: [
+    { id:'tdh_01', title:'Xem giờ đúng', icon:'🕐', desc:'Đọc giờ trên đồng hồ', items:[
+      {type:'read',hour:3,minute:0,opts:['2 giờ','3 giờ','4 giờ','3 giờ 30 phút']},
+      {type:'read',hour:7,minute:30,opts:['6 giờ 30','7 giờ','7 giờ 30','8 giờ']},
+      {type:'read',hour:12,minute:0,opts:['11 giờ','12 giờ trưa','12 giờ 30','1 giờ']},
+      {type:'read',hour:9,minute:15,opts:['9 giờ','9 giờ 15','9 giờ 30','9 giờ 45']},
+    ]},
+    { id:'tdh_02', title:'Vẽ kim đồng hồ', icon:'🕐', desc:'Kéo kim đến đúng giờ', items:[
+      {type:'draw',hour:3,minute:30},
+      {type:'draw',hour:6,minute:0},
+      {type:'draw',hour:10,minute:15},
+      {type:'draw',hour:8,minute:45},
+    ]},
+  ],
+  toan_do_luong: [
+    { id:'tdl_01', title:'Đơn vị độ dài', icon:'📏', desc:'Chọn đáp án đúng', items:[
+      {q:'1 m = ? cm',opts:['10 cm','100 cm','1000 cm','10000 cm'],ans:1,hint:'1 m = 100 cm'},
+      {q:'Cái bàn học dài khoảng bao nhiêu?',opts:['60 cm','1 m 20 cm','3 m','5 m'],ans:1,hint:'Chiều dài bàn học thường khoảng 1 m 20 cm'},
+      {q:'50 cm + 50 cm = ?',opts:['100 m','1 m','10 m','100 cm'],ans:1,hint:'50 + 50 = 100 cm = 1 m'},
+      {q:'Chiều cao bé lớp 2 khoảng bao nhiêu?',opts:['80 cm','1 m 20 cm','2 m','50 cm'],ans:1,hint:'Chiều cao trẻ lớp 2 khoảng 1 m 20 cm'},
+    ]},
+    { id:'tdl_02', title:'Đơn vị khối lượng', icon:'📏', desc:'Chọn đáp án đúng', items:[
+      {q:'1 kg = ? g',opts:['10 g','100 g','1000 g','10000 g'],ans:2,hint:'1 kg = 1000 g'},
+      {q:'Quả táo nặng khoảng bao nhiêu?',opts:['5 g','50 g','200 g','2 kg'],ans:2,hint:'Quả táo thường nặng khoảng 200 g'},
+      {q:'500 g + 500 g = ?',opts:['100 g','1000 g','1 kg','Cả B và C'],ans:3,hint:'500 + 500 = 1000 g = 1 kg'},
+    ]},
+  ],
 };
 
 // ══════════════════════════════════════════════
@@ -1130,53 +1567,45 @@ async function loadData() {
   }
 
   try {
-    // Fetch tất cả 6 tab song song
     const [
-      tapDocRes,
-      ltClassifyRes,
-      ltSentenceRes,
-      dauCauRes,
-      cthChooseRes,
-      cthUnderlineRes,
+      tapDocRes, ltClassifyRes, ltSentenceRes, dauCauRes, cthChooseRes, cthUnderlineRes,
+      ctRes, ncRes, ssRes, lvRes, dhRes, dlRes,
     ] = await Promise.allSettled([
-      cfg.tap_doc              ? fetchSheet(cfg.tap_doc).then(transformTapDoc)           : Promise.resolve(FALLBACK_DATA.tap_doc),
-      cfg.luyen_tu_classify    ? fetchSheet(cfg.luyen_tu_classify).then(transformLTClassify)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type === 'classify')),
-      cfg.luyen_tu_sentence    ? fetchSheet(cfg.luyen_tu_sentence).then(transformLTSentence)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type === 'sentence_type')),
-      cfg.dau_cau              ? fetchSheet(cfg.dau_cau).then(transformDauCau)           : Promise.resolve(FALLBACK_DATA.dau_cau),
-      cfg.cum_tu_hoi_choose    ? fetchSheet(cfg.cum_tu_hoi_choose).then(transformCTHChoose)   : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'choose')),
-      cfg.cum_tu_hoi_underline ? fetchSheet(cfg.cum_tu_hoi_underline).then(transformCTHUnderline) : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'match_underline')),
+      cfg.tap_doc              ? fetchSheet(cfg.tap_doc).then(transformTapDoc)                : Promise.resolve(FALLBACK_DATA.tap_doc),
+      cfg.luyen_tu_classify    ? fetchSheet(cfg.luyen_tu_classify).then(transformLTClassify)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type==='classify')),
+      cfg.luyen_tu_sentence    ? fetchSheet(cfg.luyen_tu_sentence).then(transformLTSentence)  : Promise.resolve(FALLBACK_DATA.luyen_tu.filter(e => e.type==='sentence_type')),
+      cfg.dau_cau              ? fetchSheet(cfg.dau_cau).then(transformDauCau)                : Promise.resolve(FALLBACK_DATA.dau_cau),
+      cfg.cum_tu_hoi_choose    ? fetchSheet(cfg.cum_tu_hoi_choose).then(transformCTHChoose)   : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type==='choose')),
+      cfg.cum_tu_hoi_underline ? fetchSheet(cfg.cum_tu_hoi_underline).then(transformCTHUnderline) : Promise.resolve(FALLBACK_DATA.cum_tu_hoi.filter(e => e.type==='match_underline')),
+      cfg.toan_cong_tru   ? fetchSheet(cfg.toan_cong_tru).then(transformCongTru)    : Promise.resolve(FALLBACK_DATA.toan_cong_tru),
+      cfg.toan_nhan_chia  ? fetchSheet(cfg.toan_nhan_chia).then(transformNhanChia)  : Promise.resolve(FALLBACK_DATA.toan_nhan_chia),
+      cfg.toan_so_sanh    ? fetchSheet(cfg.toan_so_sanh).then(transformSoSanh)      : Promise.resolve(FALLBACK_DATA.toan_so_sanh),
+      cfg.toan_loi_van    ? fetchSheet(cfg.toan_loi_van).then(transformLoiVan)      : Promise.resolve(FALLBACK_DATA.toan_loi_van),
+      cfg.toan_dong_ho    ? fetchSheet(cfg.toan_dong_ho).then(transformDongHo)      : Promise.resolve(FALLBACK_DATA.toan_dong_ho),
+      cfg.toan_do_luong   ? fetchSheet(cfg.toan_do_luong).then(transformDoLuong)    : Promise.resolve(FALLBACK_DATA.toan_do_luong),
     ]);
 
-    // Lấy giá trị hoặc fallback nếu tab lỗi
     const get = (res, fallback) => res.status === 'fulfilled' ? res.value : fallback;
-
     DATA = {
-      tap_doc: get(tapDocRes, FALLBACK_DATA.tap_doc),
-
-      // Gộp 2 tab luyện từ thành 1 mảng
-      luyen_tu: [
-        ...get(ltClassifyRes,  FALLBACK_DATA.luyen_tu.filter(e => e.type === 'classify')),
-        ...get(ltSentenceRes,  FALLBACK_DATA.luyen_tu.filter(e => e.type === 'sentence_type')),
-      ],
-
-      dau_cau: get(dauCauRes, FALLBACK_DATA.dau_cau),
-
-      // Gộp 2 tab cụm từ hỏi thành 1 mảng
-      cum_tu_hoi: [
-        ...get(cthChooseRes,    FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'choose')),
-        ...get(cthUnderlineRes, FALLBACK_DATA.cum_tu_hoi.filter(e => e.type === 'match_underline')),
-      ],
+      tap_doc:    get(tapDocRes,   FALLBACK_DATA.tap_doc),
+      luyen_tu:   [...get(ltClassifyRes, FALLBACK_DATA.luyen_tu.filter(e=>e.type==='classify')),
+                   ...get(ltSentenceRes, FALLBACK_DATA.luyen_tu.filter(e=>e.type==='sentence_type'))],
+      dau_cau:    get(dauCauRes,   FALLBACK_DATA.dau_cau),
+      cum_tu_hoi: [...get(cthChooseRes,    FALLBACK_DATA.cum_tu_hoi.filter(e=>e.type==='choose')),
+                   ...get(cthUnderlineRes, FALLBACK_DATA.cum_tu_hoi.filter(e=>e.type==='match_underline'))],
+      toan_cong_tru:  get(ctRes, FALLBACK_DATA.toan_cong_tru),
+      toan_nhan_chia: get(ncRes, FALLBACK_DATA.toan_nhan_chia),
+      toan_so_sanh:   get(ssRes, FALLBACK_DATA.toan_so_sanh),
+      toan_loi_van:   get(lvRes, FALLBACK_DATA.toan_loi_van),
+      toan_dong_ho:   get(dhRes, FALLBACK_DATA.toan_dong_ho),
+      toan_do_luong:  get(dlRes, FALLBACK_DATA.toan_do_luong),
     };
-
-    const failed = [tapDocRes, ltClassifyRes, ltSentenceRes, dauCauRes, cthChooseRes, cthUnderlineRes]
-      .filter(r => r.status === 'rejected');
-    if (failed.length) console.warn(`${failed.length} tab không fetch được, dùng data mẫu thay thế.`);
-
+    const failed = [tapDocRes,ltClassifyRes,ltSentenceRes,dauCauRes,cthChooseRes,cthUnderlineRes,ctRes,ncRes,ssRes,lvRes,dhRes,dlRes].filter(r=>r.status==='rejected');
+    if (failed.length) console.warn(`${failed.length} tab lỗi, dùng data mẫu.`);
   } catch(e) {
-    console.warn('Lỗi fetch Sheet, dùng data mẫu:', e);
+    console.warn('Lỗi fetch:', e);
     DATA = FALLBACK_DATA;
   }
-
   hideLoadingScreen();
 }
 
@@ -1215,6 +1644,12 @@ function updateBadges() {
   document.getElementById('badge-lt').textContent  = (DATA.luyen_tu?.length   || 0) + ' bài';
   document.getElementById('badge-dc').textContent  = (DATA.dau_cau?.length    || 0) + ' bài';
   document.getElementById('badge-cth').textContent = (DATA.cum_tu_hoi?.length || 0) + ' bài';
+  document.getElementById('badge-ct').textContent  = (DATA.toan_cong_tru?.length  || 0) + ' bài';
+  document.getElementById('badge-nc').textContent  = (DATA.toan_nhan_chia?.length || 0) + ' bài';
+  document.getElementById('badge-ss').textContent  = (DATA.toan_so_sanh?.length   || 0) + ' bài';
+  document.getElementById('badge-lv').textContent  = (DATA.toan_loi_van?.length   || 0) + ' bài';
+  document.getElementById('badge-dh').textContent  = (DATA.toan_dong_ho?.length   || 0) + ' bài';
+  document.getElementById('badge-dl').textContent  = (DATA.toan_do_luong?.length  || 0) + ' bài';
 }
 
 // ══════════════════════════════════════════════
@@ -1239,21 +1674,40 @@ function addStars(n) {
 //  NAVIGATION
 // ══════════════════════════════════════════════
 function showScreen(id) {
-  document.querySelectorAll('.screens > div').forEach(d => d.classList.remove('active'));
+  // Ẩn tất cả màn hình bằng cả class lẫn display style
+  document.querySelectorAll('.screens > div').forEach(d => {
+    d.classList.remove('active');
+    d.style.display = 'none';
+  });
+
   const target = document.getElementById(id);
   target.classList.add('active');
+  target.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'instant' });
-  // List screens: scroll xuống để thấy danh sách bài
-  const listScreens = ['screen-tap-doc','screen-luyen-tu','screen-dau-cau','screen-cum-tu-hoi'];
-  if (listScreens.includes(id)) {
-    requestAnimationFrame(() => {
-      const inner = target.querySelector('.screen-inner');
-      if (inner) inner.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-  // Play screens: scroll xuống nội dung bài tập ngay
-  const playScreens = ['screen-td-play','screen-lt-play','screen-dc-play','screen-cth-play'];
-  if (playScreens.includes(id)) {
+
+  // Cập nhật subject tracker
+  const toanScreens = [
+    'screen-home-toan',
+    'screen-cong-tru','screen-ct-play',
+    'screen-nhan-chia','screen-nc-play',
+    'screen-so-sanh','screen-ss-play',
+    'screen-loi-van','screen-lv-play',
+    'screen-dong-ho','screen-dh-play',
+    'screen-do-luong','screen-dl-play',
+  ];
+  if (toanScreens.includes(id)) currentSubject = 'toan';
+  else currentSubject = 'viet';
+
+  // Scroll xuống nội dung cho list + play screens
+  const scrollScreens = [
+    'screen-tap-doc','screen-luyen-tu','screen-dau-cau','screen-cum-tu-hoi',
+    'screen-td-play','screen-lt-play','screen-dc-play','screen-cth-play',
+    'screen-cong-tru','screen-nhan-chia','screen-so-sanh',
+    'screen-loi-van','screen-dong-ho','screen-do-luong',
+    'screen-ct-play','screen-nc-play','screen-ss-play',
+    'screen-lv-play','screen-dh-play','screen-dl-play',
+  ];
+  if (scrollScreens.includes(id)) {
     requestAnimationFrame(() => {
       const inner = target.querySelector('.screen-inner');
       if (inner) inner.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1995,10 +2449,573 @@ function showCTHResult(ex, score) {
 }
 
 // ══════════════════════════════════════════════
+//  SUBJECT SWITCHING
+// ══════════════════════════════════════════════
+let currentSubject = 'viet';
+
+function switchSubject(sub) {
+  currentSubject = sub;
+  const hdr = document.getElementById('main-header');
+  const tViet = document.getElementById('tab-viet');
+  const tToan = document.getElementById('tab-toan');
+  tViet.className = 'subject-tab' + (sub==='viet' ? ' active viet-tab' : '');
+  tToan.className = 'subject-tab' + (sub==='toan' ? ' active toan-tab' : '');
+  if (sub === 'viet') {
+    hdr.style.background = 'linear-gradient(135deg,#4FC3F7 0%,#81C784 100%)';
+    document.getElementById('header-title').textContent = 'Tiếng Việt Lớp 2';
+    showScreen('screen-home');
+  } else {
+    hdr.style.background = 'linear-gradient(135deg,#FF8A65 0%,#FFB74D 100%)';
+    document.getElementById('header-title').textContent = 'Toán Lớp 2';
+    showScreen('screen-home-toan');
+  }
+}
+
+function goHomeToan() { switchSubject('toan'); }
+
+function showToanModule(mod) {
+  const map = {
+    'cong-tru':  ['screen-cong-tru',  renderCTList],
+    'nhan-chia': ['screen-nhan-chia', renderNCList],
+    'so-sanh':   ['screen-so-sanh',   renderSSList],
+    'loi-van':   ['screen-loi-van',   renderLVList],
+    'dong-ho':   ['screen-dong-ho',   renderDHList],
+    'do-luong':  ['screen-do-luong',  renderDLList],
+  };
+  const [screenId, renderFn] = map[mod];
+  renderFn();
+  showScreen(screenId);
+}
+
+// ── Generic toan result card ──
+function toanResultHTML(icon, title, score, total, backFn, backLabel) {
+  const stars = score===total ? 3 : score>=total*0.6 ? 2 : 1;
+  const msgs = ['Cố gắng thêm nhé! 💪','Khá lắm! 👍','Xuất sắc! 🌟'];
+  return `<div class="result-card" id="toan-result-card">
+    <div style="font-size:52px">${icon}</div>
+    <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+    <div class="result-score">${score}/${total}</div>
+    <div class="result-label">câu trả lời đúng</div>
+    <div class="result-msg">${msgs[stars-1]}</div>
+    <button class="btn-primary" style="background:#FF8A65;color:white;margin-bottom:10px" onclick="${backFn}">← ${backLabel}</button>
+    <button class="btn-primary btn-sun" onclick="goHomeToan()">🏠 Trang chủ Toán</button>
+  </div>`;
+}
+
+function scrollToToanResult() {
+  setTimeout(()=>{ const c=document.getElementById('toan-result-card'); if(c) c.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+
+// ══════════════════════════════════════════════
+//  CỘNG / TRỪ — điền số
+// ══════════════════════════════════════════════
+function renderCTList() {
+  document.getElementById('ct-list').innerHTML = DATA.toan_cong_tru.map(ex=>`
+    <div class="exercise-item" onclick="playCT('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.items.length} bài tập</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playCT(id) {
+  const ex = DATA.toan_cong_tru.find(e=>e.id===id);
+  let idx=0, score=0, input='';
+  const el = document.getElementById('ct-play-content');
+  showScreen('screen-ct-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showCTResult();
+    const q = ex.items[idx];
+    let left=q.num1, mid=q.op, right=q.num2, result=q.ans;
+    if (q.blank==='right') result=q.ans;
+    else if (q.blank==='mid') { right=q.ans; result=q.num1+(q.op==='+'?q.ans:-q.ans); }
+    else if (q.blank==='left') { left=q.ans; result=q.num1; }
+    const blankPos = q.blank;
+    const total = q.num1 + (q.op==='+'?q.num2:-q.num2);
+    input='';
+    el.innerHTML = `
+      <div class="section-title">➕ ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div class="toan-equation">
+          ${blankPos==='left'  ? `<span class="toan-blank" id="ct-blank">?</span>` : `<span>${q.num1}</span>`}
+          <span style="color:var(--muted)">${q.op}</span>
+          ${blankPos==='mid'   ? `<span class="toan-blank" id="ct-blank">?</span>` : `<span>${q.num2}</span>`}
+          <span style="color:var(--muted)">=</span>
+          ${blankPos==='right' ? `<span class="toan-blank" id="ct-blank">?</span>` : `<span>${q.ans}</span>`}
+        </div>
+        <div class="numpad-grid">
+          ${[7,8,9,4,5,6,1,2,3].map(n=>`<button class="numpad-btn" onclick="ctKey(${n})">${n}</button>`).join('')}
+          <button class="numpad-btn" style="grid-column:span 2" onclick="ctKey(0)">0</button>
+          <button class="numpad-btn del" onclick="ctDel()">⌫</button>
+        </div>
+        <button class="btn-primary" style="background:#FF8A65;color:white;margin-top:12px" onclick="ctCheck(${q.ans})">✓ Kiểm tra</button>
+        <div class="feedback-msg" id="ct-fb" style="margin-top:12px"></div>
+      </div>`;
+
+    window.ctKey = function(n) {
+      if (input.length>=4) return;
+      input += n;
+      const b = document.getElementById('ct-blank');
+      if (b) b.textContent = input;
+    };
+    window.ctDel = function() {
+      input = input.slice(0,-1)||'';
+      const b = document.getElementById('ct-blank');
+      if (b) b.textContent = input||'?';
+    };
+    window.ctCheck = function(ans) {
+      if (!input) return;
+      const blank = document.getElementById('ct-blank');
+      const fb = document.getElementById('ct-fb');
+      const isOk = parseInt(input)===ans;
+      const isLast = idx>=ex.items.length-1;
+      if (isOk) { score++; blank.classList.add('filled-correct'); fb.className='feedback-msg correct show'; fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> Giỏi lắm!'; }
+      else       { blank.classList.add('filled-wrong'); blank.textContent=ans; blank.classList.add('filled-correct'); fb.className='feedback-msg wrong show'; fb.innerHTML=`<span style="font-size:18px">❌</span> Sai! Đáp án đúng là <strong>${ans}</strong>`; }
+      document.querySelectorAll('.numpad-btn,.btn-primary').forEach(b=>b.disabled=true);
+      const nextBtn = document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#FF8A65;color:white;margin-top:12px';
+      nextBtn.textContent = isLast?'🎉 Xem kết quả':'Câu tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();};
+      fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+  function showCTResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('🎊',ex.title,score,ex.items.length,"showToanModule('cong-tru')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+// ══════════════════════════════════════════════
+//  NHÂN / CHIA — trắc nghiệm
+// ══════════════════════════════════════════════
+function renderNCList() {
+  document.getElementById('nc-list').innerHTML = DATA.toan_nhan_chia.map(ex=>`
+    <div class="exercise-item" onclick="playNC('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.items.length} bài tập</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playNC(id) {
+  const ex = DATA.toan_nhan_chia.find(e=>e.id===id);
+  let idx=0, score=0;
+  const el = document.getElementById('nc-play-content');
+  showScreen('screen-nc-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showNCResult();
+    const q = ex.items[idx];
+    const letters=['A','B','C','D'];
+    el.innerHTML=`
+      <div class="section-title">✖️ ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div class="toan-equation">${q.num1} <span style="color:var(--muted)">${q.op}</span> ${q.num2} <span style="color:var(--muted)">=</span> <span class="toan-blank" id="nc-blank">?</span></div>
+        <div class="option-list">${q.opts.map((o,i)=>`<button class="option-btn" onclick="ncAnswer(${i},${q.ans})"><span class="option-letter">${letters[i]}</span> ${o}</button>`).join('')}</div>
+        <div class="feedback-msg" id="nc-fb"></div>
+      </div>`;
+
+    window.ncAnswer = function(i, ans) {
+      const btns = document.querySelectorAll('.option-btn');
+      btns.forEach(b=>b.disabled=true);
+      const fb=document.getElementById('nc-fb');
+      const blank=document.getElementById('nc-blank');
+      const isOk=i===ans; const isLast=idx>=ex.items.length-1;
+      blank.textContent=q.opts[i]; blank.classList.add(isOk?'filled-correct':'filled-wrong');
+      if (isOk) { score++; btns[i].classList.add('correct'); fb.className='feedback-msg correct show'; fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong>'; }
+      else       { btns[i].classList.add('wrong'); btns[ans].classList.add('correct'); fb.className='feedback-msg wrong show'; fb.innerHTML=`❌ Sai! Đáp án đúng là <strong>${q.opts[ans]}</strong>`; }
+      const nextBtn=document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#FF8A65;color:white;margin-top:12px';
+      nextBtn.textContent=isLast?'🎉 Xem kết quả':'Câu tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();}; fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+  function showNCResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('🎊',ex.title,score,ex.items.length,"showToanModule('nhan-chia')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+// ══════════════════════════════════════════════
+//  SO SÁNH SỐ — chọn dấu
+// ══════════════════════════════════════════════
+function renderSSList() {
+  document.getElementById('ss-list').innerHTML = DATA.toan_so_sanh.map(ex=>`
+    <div class="exercise-item" onclick="playSS('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.items.length} câu so sánh</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playSS(id) {
+  const ex = DATA.toan_so_sanh.find(e=>e.id===id);
+  let idx=0, score=0;
+  const el = document.getElementById('ss-play-content');
+  showScreen('screen-ss-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showSSResult();
+    const q = ex.items[idx];
+    el.innerHTML=`
+      <div class="section-title">🔢 ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div class="toan-equation">
+          <span style="color:#1565C0;font-size:40px">${q.left}</span>
+          <span id="ss-sign" style="width:56px;height:56px;border-radius:50%;border:2.5px dashed #F48FB1;background:#FCE4EC;display:flex;align-items:center;justify-content:center;font-size:28px;color:#F48FB1;font-family:'Baloo 2',cursive">?</span>
+          <span style="color:#1565C0;font-size:40px">${q.right}</span>
+        </div>
+        <div class="sign-choices">
+          <button class="sign-btn" onclick="ssAnswer('&gt;','${q.sign}')">&gt;</button>
+          <button class="sign-btn" onclick="ssAnswer('&lt;','${q.sign}')">&lt;</button>
+          <button class="sign-btn" onclick="ssAnswer('=','${q.sign}')">=</button>
+        </div>
+        <div class="feedback-msg" id="ss-fb" style="margin-top:12px"></div>
+      </div>`;
+
+    window.ssAnswer = function(chosen, correct) {
+      document.querySelectorAll('.sign-btn').forEach(b=>b.disabled=true);
+      const sign=document.getElementById('ss-sign');
+      const fb=document.getElementById('ss-fb');
+      const isOk=chosen===correct; const isLast=idx>=ex.items.length-1;
+      sign.textContent=chosen; sign.style.background=isOk?'#E8F5E9':'#FFEBEE'; sign.style.color=isOk?'#2E7D32':'#C62828'; sign.style.borderColor=isOk?'#81C784':'#EF9A9A';
+      document.querySelectorAll('.sign-btn').forEach(b=>{ if(b.textContent===correct) b.classList.add('correct'); else if(b.textContent===chosen&&!isOk) b.classList.add('wrong'); });
+      if (isOk) { score++; fb.className='feedback-msg correct show'; fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong>'; }
+      else       { fb.className='feedback-msg wrong show'; fb.innerHTML=`❌ Sai! Dấu đúng là <strong>${correct}</strong>`; }
+      const nextBtn=document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#64B5F6;color:white;margin-top:12px';
+      nextBtn.textContent=isLast?'🎉 Xem kết quả':'Câu tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();}; fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+  function showSSResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('🎊',ex.title,score,ex.items.length,"showToanModule('so-sanh')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+// ══════════════════════════════════════════════
+//  TOÁN LỜI VĂN — đọc đề, trắc nghiệm
+// ══════════════════════════════════════════════
+function renderLVList() {
+  document.getElementById('lv-list').innerHTML = DATA.toan_loi_van.map(ex=>`
+    <div class="exercise-item" onclick="playLV('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.items.length} bài toán</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playLV(id) {
+  const ex = DATA.toan_loi_van.find(e=>e.id===id);
+  let idx=0, score=0;
+  const el = document.getElementById('lv-play-content');
+  showScreen('screen-lv-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showLVResult();
+    const q = ex.items[idx];
+    const letters=['A','B','C','D'];
+    el.innerHTML=`
+      <div class="section-title">📖 ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Bài ${idx+1} / ${ex.items.length}</div>
+        <div class="story-box">${q.story}</div>
+        <div class="quiz-question" style="margin-bottom:12px">${q.q}</div>
+        <div class="option-list">${q.opts.map((o,i)=>`<button class="option-btn" onclick="lvAnswer(${i},${q.ans})"><span class="option-letter">${letters[i]}</span> ${o}</button>`).join('')}</div>
+        <div class="feedback-msg" id="lv-fb"></div>
+      </div>`;
+
+    window.lvAnswer = function(i, ans) {
+      const btns=document.querySelectorAll('.option-btn');
+      btns.forEach(b=>b.disabled=true);
+      const fb=document.getElementById('lv-fb');
+      const isOk=i===ans; const isLast=idx>=ex.items.length-1;
+      if(isOk){score++;btns[i].classList.add('correct');fb.className='feedback-msg correct show';fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong>'+(q.hint?` Gợi ý: ${q.hint}`:'');}
+      else{btns[i].classList.add('wrong');btns[ans].classList.add('correct');fb.className='feedback-msg wrong show';fb.innerHTML=`❌ Sai! Đáp án đúng là <strong>${q.opts[ans]}</strong>`+(q.hint?`. ${q.hint}`:'');}
+      const nextBtn=document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#F06292;color:white;margin-top:12px';
+      nextBtn.textContent=isLast?'🎉 Xem kết quả':'Bài tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();}; fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+  function showLVResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('🎊',ex.title,score,ex.items.length,"showToanModule('loi-van')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+// ══════════════════════════════════════════════
+//  ĐỒNG HỒ — xem giờ + kéo kim SVG
+// ══════════════════════════════════════════════
+function renderDHList() {
+  document.getElementById('dh-list').innerHTML = DATA.toan_dong_ho.map(ex=>`
+    <div class="exercise-item" onclick="playDH('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.desc}</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playDH(id) {
+  const ex = DATA.toan_dong_ho.find(e=>e.id===id);
+  let idx=0, score=0;
+  const el = document.getElementById('dh-play-content');
+  showScreen('screen-dh-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showDHResult();
+    const q = ex.items[idx];
+    if (q.type==='read') renderDHRead(q);
+    else renderDHDraw(q);
+  }
+
+  function renderDHRead(q) {
+    const letters=['A','B','C','D'];
+    const svgClock = buildClockSVG(q.hour, q.minute, 100, false);
+    el.innerHTML=`
+      <div class="section-title">🕐 ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div style="font-size:14px;font-weight:700;text-align:center;margin-bottom:12px;color:var(--muted)">Đồng hồ này chỉ mấy giờ?</div>
+        <div class="clock-container">${svgClock}</div>
+        <div class="option-list">${q.opts.map((o,i)=>`<button class="option-btn" onclick="dhReadAnswer(${i})"><span class="option-letter">${letters[i]}</span> ${o}</button>`).join('')}</div>
+        <div class="feedback-msg" id="dh-fb"></div>
+      </div>`;
+
+    const correctIdx = q.opts.findIndex(o => {
+      const h = parseInt(o), m = o.includes('30')?30:o.includes('15')?15:o.includes('45')?45:0;
+      return h===q.hour && m===q.minute;
+    });
+    window.dhReadAnswer = function(i) {
+      const btns=document.querySelectorAll('.option-btn');
+      btns.forEach(b=>b.disabled=true);
+      const fb=document.getElementById('dh-fb');
+      const isOk=q.opts[i].includes(String(q.hour))&&(q.minute===0||q.opts[i].includes(String(q.minute)));
+      const isLast=idx>=ex.items.length-1;
+      if(isOk){score++;btns[i].classList.add('correct');fb.className='feedback-msg correct show';fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong>';}
+      else{btns[i].classList.add('wrong'); const cIdx=q.opts.findIndex(o=>o.includes(String(q.hour))&&(q.minute===0||o.includes(String(q.minute)))); if(cIdx>=0)btns[cIdx].classList.add('correct'); fb.className='feedback-msg wrong show';fb.innerHTML=`❌ Sai! Đồng hồ chỉ ${q.hour} giờ${q.minute?` ${q.minute} phút`:''}.`;}
+      const nextBtn=document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#5C6BC0;color:white;margin-top:12px';
+      nextBtn.textContent=isLast?'🎉 Xem kết quả':'Câu tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();}; fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+
+  function renderDHDraw(q) {
+    let dragHour = q.hour, dragMin = q.minute;
+    const CX=110, CY=110, R=95;
+
+    function angleFromTime(h,m){ return ((h%12)+(m/60))*30-90; }
+    function handPos(deg,len){ const a=deg*Math.PI/180; return {x:CX+Math.cos(a)*len, y:CY+Math.sin(a)*len}; }
+    function normAngle(a){ return ((a%360)+360)%360; }
+
+    function buildSVG(h, m) {
+      const ha=angleFromTime(h,m), ma=(m/60)*360-90;
+      const hp=handPos(ha,55), mp=handPos(ma,75);
+      const nums=[[12,CX,CY-78],[1,CX+42,CY-66],[2,CX+70,CY-40],[3,CX+80,CY],[4,CX+70,CY+42],[5,CX+42,CY+68],[6,CX,CY+80],[7,CX-43,CY+68],[8,CX-71,CY+42],[9,CX-82,CY],[10,CX-71,CY-40],[11,CX-43,CY-66]];
+      return `<svg id="dh-svg" width="220" height="220" viewBox="0 0 220 220" style="touch-action:none;display:block;margin:0 auto">
+        <circle cx="${CX}" cy="${CY}" r="${R}" fill="white" stroke="#5C6BC0" stroke-width="3"/>
+        <circle cx="${CX}" cy="${CY}" r="${R-6}" fill="#F3F4FE"/>
+        ${nums.map(([n,x,y])=>`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="${[12,3,6,9].includes(n)?'14':'10'}" font-weight="800" fill="${[12,3,6,9].includes(n)?'#3949AB':'#7986CB'}">${n}</text>`).join('')}
+        <line x1="${CX}" y1="${CY}" x2="${hp.x}" y2="${hp.y}" stroke="#283593" stroke-width="5" stroke-linecap="round"/>
+        <line x1="${CX}" y1="${CY}" x2="${mp.x}" y2="${mp.y}" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${CX}" cy="${CY}" r="5" fill="#283593"/>
+        <circle cx="${hp.x}" cy="${hp.y}" r="12" fill="#BBDEFB" stroke="#5C6BC0" stroke-width="2" id="hour-knob" style="cursor:grab"/>
+        <circle cx="${mp.x}" cy="${mp.y}" r="12" fill="#FFCDD2" stroke="#EF9A9A" stroke-width="2" id="min-knob" style="cursor:grab"/>
+      </svg>`;
+    }
+
+    function updateDisplay() {
+      const disp = document.getElementById('dh-time-display');
+      if (disp) disp.textContent = `${dragHour} giờ${dragMin>0?' '+dragMin+' phút':''}`;
+    }
+
+    el.innerHTML=`
+      <div class="section-title">🕐 ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div class="clock-target">
+          <div class="ct-label">Chỉnh đồng hồ thành</div>
+          <div class="ct-time">${q.hour} giờ${q.minute>0?' '+q.minute+' phút':''}</div>
+        </div>
+        <div class="clock-hint">🔵 Kéo nút xanh = kim giờ &nbsp;|&nbsp; 🔴 Kéo nút đỏ = kim phút</div>
+        <div id="dh-clock-wrap">${buildSVG(dragHour,dragMin)}</div>
+        <div style="text-align:center;font-size:14px;font-weight:700;color:#3949AB;margin:8px 0 12px" id="dh-time-display">${dragHour} giờ${dragMin>0?' '+dragMin+' phút':''}</div>
+        <button class="btn-primary" style="background:#5C6BC0;color:white" onclick="dhDrawCheck(${q.hour},${q.minute})">✓ Kiểm tra</button>
+        <div class="feedback-msg" id="dh-fb" style="margin-top:12px"></div>
+      </div>`;
+
+    // Attach drag — use SVG clientPoint to get accurate coords inside SVG
+    let activeDrag = null;
+
+    function getSVGAngle(e) {
+      const svg = document.getElementById('dh-svg');
+      if (!svg) return 0;
+      const rect = svg.getBoundingClientRect();
+      const scaleX = 220 / rect.width;
+      const scaleY = 220 / rect.height;
+      const src = e.touches ? e.touches[0] : e;
+      const svgX = (src.clientX - rect.left) * scaleX;
+      const svgY = (src.clientY - rect.top)  * scaleY;
+      return normAngle(Math.atan2(svgY - CY, svgX - CX) * 180 / Math.PI + 90);
+    }
+
+    function onMove(e) {
+      if (!activeDrag) return;
+      e.preventDefault();
+      const a = getSVGAngle(e);
+      if (activeDrag === 'hour') {
+        dragHour = Math.round(a / 30) % 12 || 12;
+      } else {
+        dragMin = Math.round(a / 6) % 60;
+      }
+      const wrap = document.getElementById('dh-clock-wrap');
+      if (wrap) wrap.innerHTML = buildSVG(dragHour, dragMin);
+      updateDisplay();
+      // Re-attach after innerHTML replace
+      attachKnobs();
+    }
+
+    function onUp() { activeDrag = null; }
+
+    function attachKnobs() {
+      const hk = document.getElementById('hour-knob');
+      const mk = document.getElementById('min-knob');
+      if (!hk || !mk) return;
+      hk.addEventListener('pointerdown', e => { activeDrag='hour'; e.preventDefault(); }, {passive:false});
+      mk.addEventListener('pointerdown', e => { activeDrag='min';  e.preventDefault(); }, {passive:false});
+    }
+
+    attachKnobs();
+
+    // Store handlers so we can remove them when leaving this screen
+    window._dhMoveHandler = onMove;
+    window._dhUpHandler   = onUp;
+    document.addEventListener('pointermove', onMove, {passive:false});
+    document.addEventListener('pointerup',   onUp);
+    document.addEventListener('touchmove',   onMove, {passive:false});
+    document.addEventListener('touchend',    onUp);
+
+    window.dhDrawCheck = function(targetH, targetM) {
+      // Clean up drag listeners
+      document.removeEventListener('pointermove', window._dhMoveHandler);
+      document.removeEventListener('pointerup',   window._dhUpHandler);
+      document.removeEventListener('touchmove',   window._dhMoveHandler);
+      document.removeEventListener('touchend',    window._dhUpHandler);
+
+      const fb = document.getElementById('dh-fb');
+      const hOk = dragHour === targetH;
+      const mOk = Math.abs(dragMin - targetM) <= 5;
+      const ok  = hOk && mOk;
+      const isLast = idx >= ex.items.length - 1;
+      if (ok) { score++; fb.className='feedback-msg correct show'; fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong> Kim đồng hồ chính xác!'; }
+      else    { fb.className='feedback-msg wrong show'; fb.innerHTML=`❌ Chưa đúng! Kim giờ cần số <strong>${targetH}</strong>, kim phút cần chỉ ${targetM===0?'số 12':targetM+' phút'}.`; }
+      document.querySelectorAll('.btn-primary').forEach(b=>b.disabled=true);
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn-primary '+(isLast?'btn-sun':'');
+      nextBtn.style.cssText = 'background:#5C6BC0;color:white;margin-top:12px';
+      nextBtn.textContent = isLast ? '🎉 Xem kết quả' : 'Câu tiếp theo →';
+      nextBtn.onclick = () => { activeDrag=null; idx++; render(); };
+      fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+
+  function showDHResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('⏰',ex.title,score,ex.items.length,"showToanModule('dong-ho')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+function buildClockSVG(hour, minute, r, interactive) {
+  const CX=r+10,CY=r+10,size=(r+10)*2;
+  function angleFromTime(h,m){return ((h%12)+(m/60))*30-90;}
+  function handPos(angleDeg,len){const a=angleDeg*Math.PI/180;return{x:CX+Math.cos(a)*len,y:CY+Math.sin(a)*len};}
+  const ha=angleFromTime(hour,minute),ma=(minute/60)*360-90;
+  const hp=handPos(ha,r*0.55),mp=handPos(ma,r*0.78);
+  const nums=[[12,CX,CY-r*0.82],[3,CX+r*0.82,CY],[6,CX,CY+r*0.84],[9,CX-r*0.84,CY]];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <circle cx="${CX}" cy="${CY}" r="${r}" fill="white" stroke="#5C6BC0" stroke-width="3"/>
+    <circle cx="${CX}" cy="${CY}" r="${r-5}" fill="#F3F4FE"/>
+    ${nums.map(([n,x,y])=>`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="13" font-weight="800" fill="#3949AB">${n}</text>`).join('')}
+    <line x1="${CX}" y1="${CY}" x2="${hp.x}" y2="${hp.y}" stroke="#283593" stroke-width="4" stroke-linecap="round"/>
+    <line x1="${CX}" y1="${CY}" x2="${mp.x}" y2="${mp.y}" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="${CX}" cy="${CY}" r="4" fill="#283593"/>
+  </svg>`;
+}
+
+// ══════════════════════════════════════════════
+//  ĐO LƯỜNG — trắc nghiệm
+// ══════════════════════════════════════════════
+function renderDLList() {
+  document.getElementById('dl-list').innerHTML = DATA.toan_do_luong.map(ex=>`
+    <div class="exercise-item" onclick="playDL('${ex.id}')">
+      <span class="ex-icon">${ex.icon}</span>
+      <div class="ex-info"><h3>${ex.title}</h3><p>${ex.items.length} câu hỏi</p></div>
+      <span class="ex-done">${doneMap[ex.id]?'✅':'▶️'}</span>
+    </div>`).join('');
+}
+
+function playDL(id) {
+  const ex = DATA.toan_do_luong.find(e=>e.id===id);
+  let idx=0, score=0;
+  const el = document.getElementById('dl-play-content');
+  showScreen('screen-dl-play');
+
+  function render() {
+    if (idx>=ex.items.length) return showDLResult();
+    const q = ex.items[idx];
+    const letters=['A','B','C','D'];
+    el.innerHTML=`
+      <div class="section-title">📏 ${ex.title}</div>
+      <div class="toan-card">
+        <div class="toan-q-num">Câu ${idx+1} / ${ex.items.length}</div>
+        <div class="quiz-question" style="font-size:20px;text-align:center;padding:16px 0">${q.q}</div>
+        <div class="option-list">${q.opts.map((o,i)=>`<button class="option-btn" onclick="dlAnswer(${i},${q.ans})"><span class="option-letter">${letters[i]}</span> ${o}</button>`).join('')}</div>
+        <div class="feedback-msg" id="dl-fb"></div>
+      </div>`;
+
+    window.dlAnswer = function(i, ans) {
+      const btns=document.querySelectorAll('.option-btn');
+      btns.forEach(b=>b.disabled=true);
+      const fb=document.getElementById('dl-fb');
+      const isOk=i===ans; const isLast=idx>=ex.items.length-1;
+      if(isOk){score++;btns[i].classList.add('correct');fb.className='feedback-msg correct show';fb.innerHTML='<span style="font-size:20px">🎉</span> <strong>Đúng!</strong>'+(q.hint?` ${q.hint}`:'');}
+      else{btns[i].classList.add('wrong');btns[ans].classList.add('correct');fb.className='feedback-msg wrong show';fb.innerHTML=`❌ Sai! Đáp án đúng là <strong>${q.opts[ans]}</strong>`+(q.hint?`. ${q.hint}`:'');}
+      const nextBtn=document.createElement('button');
+      nextBtn.className='btn-primary '+(isLast?'btn-sun':''); nextBtn.style.cssText='background:#CE93D8;color:#4A148C;margin-top:12px';
+      nextBtn.textContent=isLast?'🎉 Xem kết quả':'Câu tiếp theo →';
+      nextBtn.onclick=()=>{idx++;render();}; fb.after(nextBtn); scrollToNextBtn(nextBtn);
+    };
+  }
+  function showDLResult() {
+    doneMap[ex.id]=true; addStars(score===ex.items.length?3:score>=ex.items.length*0.6?2:1);
+    el.innerHTML=toanResultHTML('📏',ex.title,score,ex.items.length,"showToanModule('do-luong')",'Danh sách bài');
+    scrollToToanResult();
+  }
+  render();
+}
+
+// ══════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════
 document.getElementById('total-stars').textContent = totalStars;
-loadData(); // fetch Sheet hoặc dùng fallback data
+document.getElementById('tab-viet').className = 'subject-tab active viet-tab';
+loadData();
 </script>
 </body>
 </html>
