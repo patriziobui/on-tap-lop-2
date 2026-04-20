@@ -2815,7 +2815,19 @@ function playDH(id) {
   }
 
   function renderDHDraw(q) {
-    let dragHour = q.hour, dragMin = q.minute;
+    // Khởi tạo vị trí ngẫu nhiên — chắc chắn khác với đáp án
+    function randomHour(exclude) {
+      let h;
+      do { h = Math.floor(Math.random() * 12) + 1; } while (h === exclude);
+      return h;
+    }
+    function randomMin(exclude) {
+      const opts = [0, 15, 30, 45];
+      const filtered = opts.filter(m => m !== exclude);
+      return filtered[Math.floor(Math.random() * filtered.length)];
+    }
+    let dragHour = randomHour(q.hour);
+    let dragMin  = randomMin(q.minute);
     const CX=110, CY=110, R=95;
 
     function angleFromTime(h,m){ return ((h%12)+(m/60))*30-90; }
@@ -2838,10 +2850,7 @@ function playDH(id) {
       </svg>`;
     }
 
-    function updateDisplay() {
-      const disp = document.getElementById('dh-time-display');
-      if (disp) disp.textContent = `${dragHour} giờ${dragMin>0?' '+dragMin+' phút':''}`;
-    }
+    function updateDisplay() { /* display removed */ }
 
     el.innerHTML=`
       <div class="section-title">🕐 ${ex.title}</div>
@@ -2853,8 +2862,7 @@ function playDH(id) {
         </div>
         <div class="clock-hint">🔵 Kéo nút xanh = kim giờ &nbsp;|&nbsp; 🔴 Kéo nút đỏ = kim phút</div>
         <div id="dh-clock-wrap">${buildSVG(dragHour,dragMin)}</div>
-        <div style="text-align:center;font-size:14px;font-weight:700;color:#3949AB;margin:8px 0 12px" id="dh-time-display">${dragHour} giờ${dragMin>0?' '+dragMin+' phút':''}</div>
-        <button class="btn-primary" style="background:#5C6BC0;color:white" onclick="dhDrawCheck(${q.hour},${q.minute})">✓ Kiểm tra</button>
+        <button class="btn-primary" style="background:#5C6BC0;color:white;margin-top:4px" onclick="dhDrawCheck(${q.hour},${q.minute})">✓ Kiểm tra</button>
         <div class="feedback-msg" id="dh-fb" style="margin-top:12px"></div>
       </div>`;
 
